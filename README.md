@@ -29,3 +29,7 @@ python -m http.server 8787
 ## 部署
 
 推送到 `master` 分支后，GitHub Actions 自动构建并部署到 GitHub Pages。
+
+## OpenCode 对话链接
+
+https://opncd.ai/share/vQDaSUuR
