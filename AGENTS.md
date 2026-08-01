@@ -14,6 +14,7 @@ illagerCPR 个人主页仓库（GitHub Pages）。单页纯静态站点，无构
 - 网页项目卡片默认带 `.meta` 标签；例外：`10492` 卡片不写标签（保持仅有标题 + 描述）。
 - 网页项目区末尾保留 2 个 `.card.soon` 占位卡片，新项目上线时替换其中一张（保留至少 1 个占位）。
 - hero 头像使用固定 GitHub 头像 URL（`https://avatars.githubusercontent.com/u/63698328?v=4&s=192`），随 GitHub 头像自动更新，勿替换为本地文件。
+- favicon 使用根目录 `favicon.ico`（多尺寸 16–256px，`<link rel="icon">` 引用），勿改回内联 data URI。
 - 新卡片添加到 `.grid` 容器内并带 `fade` 类（滚动淡入动画）。
 
 ## 本地预览
