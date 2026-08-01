@@ -46,12 +46,13 @@
     width: 96px; height: 96px;
     border-radius: 50%;
     border: 2px solid var(--border);
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    display: inline-flex; align-items: center; justify-content: center;
-    font-size: 40px; font-weight: 700; color: #fff;
+    background: var(--bg-card);
+    display: inline-flex;
+    overflow: hidden;
     margin-bottom: 20px;
     box-shadow: 0 0 0 6px rgba(88, 166, 255, 0.08);
   }
+  .hero .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .hero h1 { font-size: 42px; font-weight: 700; letter-spacing: 1px; }
   .hero .tagline { color: var(--text-dim); font-size: 17px; margin-top: 10px; }
   .hero .intro { max-width: 620px; margin: 18px auto 0; color: var(--text-dim); font-size: 15px; }
@@ -155,7 +156,7 @@
 
 <header class="hero">
   <div class="container">
-    <div class="avatar">i</div>
+    <div class="avatar"><img src="https://avatars.githubusercontent.com/u/63698328?v=4&s=192" alt="illagerCPR 头像" width="96" height="96"></div>
     <h1>illagerCPR</h1>
     <p class="tagline">程序开发 · Web 工具 · 趣味实验</p>
     <p class="intro">
