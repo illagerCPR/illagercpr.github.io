@@ -10,6 +10,7 @@
   - [watermark](https://illagercpr.github.io/watermark/) — 纯前端图片水印工具
   - [earth-airline-test](https://illagercpr.github.io/earth-airline-test/) — 3D 航班可视化
   - [10492](https://illagercpr.github.io/10492/) — 做好心理准备。
+  - [earth-airline-rx](https://illagercpr.github.io/earth-airline-rx/) — earth-airline-test 的 Reasonix 版本
   - 预留占位卡片，供未来项目使用
 - **开源项目**：GitHub 仓库展示
   - [watermark](https://github.com/illagerCPR/watermark) — JavaScript / Canvas
