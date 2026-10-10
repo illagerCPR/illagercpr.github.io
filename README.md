@@ -1,4 +1,4 @@
-# illagerCPR 个人主页（无名之迹）
+# 我的个人主页
 
 基于 GitHub Pages 的个人主页：https://illagercpr.github.io/
 
@@ -30,7 +30,3 @@ python -m http.server 8787
 ## 部署
 
 推送到 `master` 分支后，GitHub Actions 自动构建并部署到 GitHub Pages。
-
-## OpenCode 对话链接
-
-https://opncd.ai/share/vQDaSUuR
