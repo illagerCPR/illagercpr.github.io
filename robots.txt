@@ -1,2 +1,6 @@
 User-agent: *
-Disallow: /
+Disallow: /blog/
+Disallow: /watermark/
+Disallow: /earth-airline-test/
+Disallow: /earth-airline-rx/
+Disallow: /10492/
