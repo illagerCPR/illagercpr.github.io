@@ -2,31 +2,33 @@
 
 基于 GitHub Pages 的个人主页：https://illagercpr.github.io/
 
-现代深色系单页，零依赖、纯静态（HTML + 内联 CSS/JS），响应式适配手机与电脑。
+单页纯静态站，零依赖、无构建，手机与桌面自适应。默认跟随系统的明暗偏好，也可以手动切换；项目可按类型或语言筛选。
 
-## 内容
+## 网页项目
 
-- **网页项目**：可直接在线体验的网页应用
-  - [watermark](https://illagercpr.github.io/watermark/) — 纯前端图片水印工具
-  - [earth-airline-test](https://illagercpr.github.io/earth-airline-test/) — 3D 航班可视化
-  - [10492](https://illagercpr.github.io/10492/) — 做好心理准备。
-  - [earth-airline-rx](https://illagercpr.github.io/earth-airline-rx/) — earth-airline-test 的 Reasonix 版本
-  - 预留占位卡片，供未来项目使用
-- **开源项目**：GitHub 仓库展示
-  - [watermark](https://github.com/illagerCPR/watermark) — JavaScript / Canvas
-  - [keyshow](https://github.com/illagerCPR/keyshow) — Rust / Vue 3 / Tauri 2
-  - [hanoi](https://github.com/illagerCPR/hanoi) — Python / tkinter
+可直接在线体验的纯前端应用：
 
-## 本地预览
+- [watermark](https://illagercpr.github.io/watermark/) — 纯前端图片水印工具
+- [earth-airline-test](https://illagercpr.github.io/earth-airline-test/) — 3D 航班可视化
+- [10492](https://illagercpr.github.io/10492/) — 做好心理准备。
+- [earth-airline-rx](https://illagercpr.github.io/earth-airline-rx/) — earth-airline-test 的 Reasonix 版本
+- 预留一个占位，供未来项目使用
 
-任意静态服务器即可，例如：
+## 开源项目
 
-```bash
-python -m http.server 8787
-```
+托管在 GitHub 上的仓库：
 
-浏览器访问 http://127.0.0.1:8787/
+- [Tiderift](https://github.com/illagerCPR/Tiderift) — JavaScript / Three.js
+- [watermark](https://github.com/illagerCPR/watermark) — JavaScript / Canvas
+- [keyshow](https://github.com/illagerCPR/keyshow) — Rust / Vue 3 / Tauri 2
+- [hanoi](https://github.com/illagerCPR/hanoi) — Python / tkinter
+- [deepseek-harness-startup](https://github.com/illagerCPR/deepseek-harness-startup) — Python / PyInstaller
+- [video-watermark](https://github.com/illagerCPR/video-watermark) — Python / ffmpeg
+- [LAN-Drop](https://github.com/illagerCPR/LAN-Drop) — Node.js / Kotlin
+- [the-truth](https://github.com/illagerCPR/the-truth) — Java / NeoForge
+- [creative-container](https://github.com/illagerCPR/creative-container) — Java / NeoForge
 
-## 部署
+## 链接
 
-推送到 `master` 分支后，GitHub Actions 自动构建并部署到 GitHub Pages。
+- GitHub：<https://github.com/illagerCPR>
+- 博客：<https://illagercpr.github.io/blog/>

@@ -3,322 +3,656 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
 <title>illagerCPR · 个人主页</title>
 <meta name="description" content="illagerCPR 的个人主页：网页项目与开源项目集合。">
+<meta name="msvalidate.01" content="7CC5F80953B78F78F664A58A171CC826">
+<link rel="canonical" href="https://illagercpr.github.io/">
 <link rel="icon" href="favicon.ico">
+<meta name="theme-color" content="#f3f0e9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#100f0e" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="illagerCPR · 个人主页">
+<meta property="og:description" content="illagerCPR 的个人主页：网页项目与开源项目集合。">
+<meta property="og:url" content="https://illagercpr.github.io/">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/63698328?v=4&amp;s=192">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="illagerCPR · 个人主页">
+<meta name="twitter:description" content="illagerCPR 的个人主页：网页项目与开源项目集合。">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/63698328?v=4&amp;s=192">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"illagerCPR","alternateName":"无名之迹","url":"https://illagercpr.github.io/","image":"https://avatars.githubusercontent.com/u/63698328?v=4&s=192","sameAs":["https://github.com/illagerCPR","https://illagercpr.github.io/blog/"]}
+</script>
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem('theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
 <style>
   :root {
-    --bg: #0d1117;
-    --bg-card: #161b22;
-    --bg-card-hover: #1c2330;
-    --border: #30363d;
-    --border-dim: #21262d;
-    --text: #e6edf3;
-    --text-dim: #8b949e;
-    --accent: #58a6ff;
-    --accent-2: #bc8cff;
-    --accent-3: #3fb950;
-    --radius: 12px;
+    --paper: #f3f0e9;
+    --ink: #17140f;
+    --muted: #6f685c;
+    --rule: rgba(23, 20, 15, .13);
+    --rule-strong: rgba(23, 20, 15, .34);
+    --accent: #c0432a;
+    --accent-soft: rgba(192, 67, 42, .09);
+    --chip: rgba(23, 20, 15, .045);
+    --hl: rgba(192, 67, 42, .055);
+    --mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    --ease: cubic-bezier(.2, .7, .2, 1);
+  }
+  html[data-theme="dark"] {
+    --paper: #100f0e;
+    --ink: #f2ede4;
+    --muted: #8f887b;
+    --rule: rgba(242, 237, 228, .14);
+    --rule-strong: rgba(242, 237, 228, .38);
+    --accent: #f4693f;
+    --accent-soft: rgba(244, 105, 63, .12);
+    --chip: rgba(242, 237, 228, .06);
+    --hl: rgba(244, 105, 63, .07);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.7;
-    min-height: 100vh;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
-  a { color: var(--accent); text-decoration: none; }
+  ::selection { background: var(--accent); color: var(--paper); }
+  a { color: inherit; text-decoration: none; }
+  [hidden] { display: none !important; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  code, .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
 
-  .container { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+  .progress {
+    position: fixed; inset: 0 0 auto 0; height: 2px;
+    z-index: 50; pointer-events: none;
+  }
+  .progress i {
+    display: block; height: 100%; width: 100%;
+    background: var(--accent);
+    transform: scaleX(0); transform-origin: 0 50%;
+  }
+  .skip {
+    position: fixed; top: 10px; left: 10px; z-index: 60;
+    padding: 8px 14px; background: var(--ink); color: var(--paper);
+    font-size: 13px; transform: translateY(-160%);
+  }
+  .skip:focus { transform: none; }
 
-  .hero {
-    padding: 96px 0 72px;
-    text-align: center;
-    background:
-      radial-gradient(800px 320px at 50% -10%, rgba(88, 166, 255, 0.14), transparent 70%),
-      radial-gradient(600px 260px at 85% 0%, rgba(188, 140, 255, 0.10), transparent 70%),
-      var(--bg);
-    border-bottom: 1px solid var(--border-dim);
-  }
-  .hero .avatar {
-    width: 96px; height: 96px;
-    border-radius: 50%;
-    border: 2px solid var(--border);
-    background: var(--bg-card);
-    display: inline-flex;
-    overflow: hidden;
-    margin-bottom: 20px;
-    box-shadow: 0 0 0 6px rgba(88, 166, 255, 0.08);
-  }
-  .hero .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .hero h1 { font-size: 42px; font-weight: 700; letter-spacing: 1px; }
-  .hero h1 .cname {
-    font-size: 24px;
-    font-weight: 500;
-    color: var(--text-dim);
-    margin-left: 14px;
-    vertical-align: middle;
-    letter-spacing: 3px;
-  }
-  .hero .tagline { color: var(--text-dim); font-size: 17px; margin-top: 10px; }
-  .hero .intro { max-width: 620px; margin: 18px auto 0; color: var(--text-dim); font-size: 15px; }
-  .hero .links {
-    display: flex; flex-wrap: wrap; justify-content: center;
-    gap: 12px;
-    margin-top: 26px;
-  }
-  .hero .link {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 9px 20px;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    color: var(--text);
-    background: var(--bg-card);
-    font-size: 14px;
-    transition: border-color .2s, background .2s, color .2s;
-  }
-  .hero .link:hover { border-color: var(--accent); background: var(--bg-card-hover); }
-  .hero .link svg { width: 16px; height: 16px; fill: var(--text-dim); transition: fill .2s; }
-  .hero .link .en { color: var(--text-dim); font-size: 11px; letter-spacing: 1.5px; }
-  .hero .link.blog:hover { border-color: var(--accent-2); color: var(--accent-2); }
-  .hero .link.blog:hover svg { fill: var(--accent-2); }
-
-  section { padding: 64px 0; }
-  section + section { border-top: 1px solid var(--border-dim); }
-  .section-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 8px; }
-  .section-head h2 { font-size: 24px; }
-  .section-head .en { color: var(--text-dim); font-size: 13px; letter-spacing: 2px; }
-  .section-sub { color: var(--text-dim); font-size: 14px; margin-bottom: 28px; }
-
-  .grid {
+  .shell {
+    max-width: 1280px; margin: 0 auto;
+    padding: 0 clamp(20px, 3.5vw, 56px);
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-    gap: 16px;
+    grid-template-columns: minmax(240px, 310px) minmax(0, 1fr);
+    gap: clamp(32px, 4.5vw, 72px);
+    align-items: start;
   }
-  .card {
-    position: relative;
-    display: block;
-    padding: 22px;
-    background: var(--bg-card);
-    border: 1px solid var(--border-dim);
-    border-radius: var(--radius);
-    transition: transform .18s ease, border-color .18s ease, background .18s ease;
-    overflow: hidden;
-  }
-  .card:hover {
-    transform: translateY(-3px);
-    border-color: var(--border);
-    background: var(--bg-card-hover);
-  }
-  .card .card-title { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-  .card h3 { font-size: 17px; font-weight: 600; color: var(--text); }
-  .card .card-title::after {
-    content: "↗";
-    color: var(--text-dim);
-    font-size: 15px;
-    flex-shrink: 0;
-    opacity: 0.7;
-  }
-  .card p { color: var(--text-dim); font-size: 13.5px; margin-top: 8px; }
-  .card .meta { margin-top: 12px; }
-  .tag {
-    display: inline-block;
-    font-size: 12px;
-    color: var(--accent);
-    background: rgba(88, 166, 255, 0.10);
-    border: 1px solid rgba(88, 166, 255, 0.25);
-    border-radius: 6px;
-    padding: 2px 9px;
-    margin-right: 6px;
-    margin-bottom: 4px;
-  }
-  .tag.green { color: var(--accent-3); background: rgba(63, 185, 80, 0.10); border-color: rgba(63, 185, 80, 0.25); }
-  .tag.purple { color: var(--accent-2); background: rgba(188, 140, 255, 0.10); border-color: rgba(188, 140, 255, 0.25); }
 
-  .card.soon { border-style: dashed; cursor: default; opacity: 0.72; }
-  .card.soon:hover { transform: none; border-color: var(--border-dim); background: var(--bg-card); }
-  .card.soon .badge {
-    position: absolute; top: 14px; right: 14px;
-    font-size: 11px; color: var(--text-dim);
-    border: 1px solid var(--border-dim); border-radius: 999px;
-    padding: 1px 10px;
+  .rail {
+    position: sticky; top: 0;
+    height: 100vh; height: 100svh;
+    display: flex; flex-direction: column;
+    padding: clamp(28px, 4vh, 52px) clamp(18px, 2vw, 30px) clamp(22px, 3vh, 36px) 0;
+    border-right: 1px solid var(--rule);
   }
-  .card.soon h3 { color: var(--text-dim); font-weight: 500; }
-  .card.soon .card-title::after { content: ""; }
+  .eyebrow, .kicker, .stamp, .meta-count, .flabel, .fcount {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--muted);
+  }
+  .eyebrow { display: flex; justify-content: space-between; }
+  .avatar {
+    width: 52px; height: 52px; border-radius: 50%;
+    object-fit: cover; display: block; margin: 26px 0 18px;
+    border: 1px solid var(--rule-strong);
+  }
+  .rail h1 {
+    font-size: clamp(30px, 3.4vw, 42px);
+    line-height: 1.02; letter-spacing: -.035em; font-weight: 650;
+  }
+  .cn { margin-top: 8px; font-size: 13px; letter-spacing: .52em; color: var(--muted); }
+  .lede { margin-top: 22px; font-size: 13.5px; line-height: 1.85; color: var(--muted); }
+  .lede b { color: var(--ink); font-weight: 550; }
+
+  .rail-body { margin-top: 30px; }
+  .rail-nav { padding-top: 4px; }
+  .rail-nav a {
+    display: grid; grid-template-columns: 26px 1fr auto;
+    align-items: baseline; gap: 10px;
+    padding: 11px 0; border-top: 1px solid var(--rule);
+    font-size: 14px; transition: color .2s var(--ease), opacity .2s var(--ease);
+  }
+  .rail-nav a:last-child { border-bottom: 1px solid var(--rule); }
+  .rail-nav .n { font-family: var(--mono); font-size: 10.5px; color: var(--muted); }
+  .rail-nav .c { font-family: var(--mono); font-size: 10.5px; color: var(--muted); }
+  .rail-nav a:hover { color: var(--accent); }
+  .rail-nav a:hover .n, .rail-nav a:hover .c { color: var(--accent); }
+  .rail-nav a[aria-disabled="true"] { opacity: .35; pointer-events: none; }
+
+  .rail-links { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 22px; }
+  .rail-links a {
+    display: inline-flex; gap: 6px; align-items: center;
+    font-size: 13px; border-bottom: 1px solid var(--rule-strong); padding-bottom: 2px;
+    transition: color .2s var(--ease), border-color .2s var(--ease);
+  }
+  .rail-links a:hover { color: var(--accent); border-color: var(--accent); }
+  .rail-links .arr { font-size: 11px; color: var(--muted); }
+
+  .rail-foot { margin-top: auto; padding-top: 26px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .stamp { line-height: 1.5; }
+  .theme {
+    flex: none; display: inline-flex; align-items: center; gap: 7px;
+    padding: 6px 11px; border: 1px solid var(--rule);
+    background: transparent; color: var(--ink);
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em;
+    cursor: pointer; border-radius: 999px;
+    transition: border-color .2s var(--ease), color .2s var(--ease);
+  }
+  .theme:hover { border-color: var(--accent); color: var(--accent); }
+  .theme .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+
+  main { min-width: 0; padding: clamp(20px, 3vh, 32px) 0 0; }
+
+  .filters {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 0;
+    margin-bottom: 22px;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+  }
+  .flabel { flex: none; font-size: 10px; letter-spacing: .18em; }
+  .fscroll {
+    display: flex; flex: 1 1 auto; gap: 6px; min-width: 0;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .fscroll::-webkit-scrollbar { display: none; }
+  .fchip {
+    flex: none; padding: 4px 10px;
+    border: 1px solid var(--rule); border-radius: 3px;
+    background: none; color: var(--muted); cursor: pointer;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em;
+    transition: color .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease);
+  }
+  .fchip:hover { color: var(--ink); border-color: var(--rule-strong); }
+  .fchip[aria-pressed="true"] { color: var(--paper); background: var(--ink); border-color: var(--ink); }
+  .fcount { margin-left: auto; flex: none; font-size: 10px; }
+  .fcount b { color: var(--ink); font-weight: 500; }
+
+  .sect { padding-bottom: clamp(52px, 7vh, 84px); scroll-margin-top: 64px; }
+  .sec-head { padding-bottom: 0; margin-bottom: 34px; }
+  .kicker { display: flex; align-items: center; gap: 10px; }
+  .kicker .idx { color: var(--accent); }
+  .kicker .meta-count { margin-left: auto; }
+  .sec-head h2 { margin-top: 12px; font-size: clamp(26px, 3vw, 34px); line-height: 1.15; letter-spacing: -.02em; font-weight: 620; }
+  .sec-head .sub { margin-top: 7px; font-size: 13.5px; color: var(--muted); }
+
+  .plates { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(24px, 3vw, 44px); }
+  .plate {
+    display: flex; flex-direction: column;
+    padding: 22px 0 26px; border-top: 1px solid var(--rule);
+    transition: border-color .25s var(--ease);
+  }
+  .plate:hover { border-color: var(--accent); }
+  .plate-top { display: flex; align-items: center; justify-content: space-between; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  .live { display: inline-flex; align-items: center; gap: 6px; letter-spacing: .14em; color: var(--accent); }
+  .live i { width: 5px; height: 5px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 3px var(--accent-soft); }
+  .plate h3 {
+    margin-top: 18px; font-size: clamp(22px, 2.4vw, 27px);
+    font-weight: 600; letter-spacing: -.02em; line-height: 1.2;
+    transition: color .2s var(--ease);
+  }
+  .plate:hover h3 { color: var(--accent); }
+  .plate .desc { margin-top: 10px; font-size: 13.5px; line-height: 1.8; color: var(--muted); max-width: 34em; }
+  .plate .tags { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .plate-foot {
+    margin-top: auto; padding-top: 22px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    font-size: 11.5px; color: var(--muted);
+  }
+  .plate-foot code { font-size: 11px; }
+  .go { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; color: var(--ink); }
+  .go .arrow { transition: transform .25s var(--ease); }
+  .plate:hover .go { color: var(--accent); }
+  .plate:hover .go .arrow { transform: translate(3px, -3px); }
+
+  .tag {
+    font-size: 11px; letter-spacing: .02em; color: var(--muted);
+    background: var(--chip); border: 1px solid var(--rule);
+    padding: 2px 8px; border-radius: 3px;
+  }
+
+  .rows { list-style: none; margin-top: 8px; }
+  .row-item { border-top: 1px solid var(--rule); }
+  .rows .row-item:first-child { border-top: 1px solid var(--rule-strong); }
+  .row {
+    display: grid; grid-template-columns: 42px minmax(0, 1fr) auto;
+    align-items: start; gap: 0 14px;
+    padding: 24px 0;
+    transition: background .2s var(--ease);
+  }
+  .row:hover { background: var(--hl); }
+  .row .no { font-family: var(--mono); font-size: 11px; color: var(--muted); padding-top: 6px; }
+  .row h3 {
+    font-size: 16.5px; font-weight: 600; letter-spacing: -.01em;
+    display: flex; align-items: center; gap: 8px;
+    transition: color .2s var(--ease);
+  }
+  .row:hover h3 { color: var(--accent); }
+  .row .desc { margin-top: 6px; font-size: 13.5px; line-height: 1.8; color: var(--muted); max-width: 62ch; }
+  .row .tags { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .row-meta { padding-top: 4px; text-align: right; display: flex; align-items: center; gap: 12px; }
+  .lang { display: inline-flex; align-items: center; gap: 7px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; color: var(--muted); white-space: nowrap; }
+  .lang i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .js { color: #a9852c; } .rust { color: #b4623c; } .py { color: #4a7a9b; }
+  .java { color: #95603f; } .node { color: #5f8d4e; }
+  .arrow { font-size: 12px; color: var(--muted); transition: transform .25s var(--ease), color .25s var(--ease); }
+  .row:hover .arrow { transform: translateX(4px); color: var(--accent); }
+
+  .row.feature { padding-top: 30px; padding-bottom: 30px; }
+  .row.feature h3 { font-size: clamp(19px, 2vw, 23px); letter-spacing: -.02em; }
+  .row.feature .desc { font-size: 14px; }
+
+  .row.soon { cursor: default; }
+  .row.soon:hover { background: none; }
+  .row.soon h3 { color: var(--muted); font-weight: 500; }
+  .row.soon:hover h3 { color: var(--muted); }
+  .row.soon .desc { color: var(--muted); opacity: .8; }
+  .soon-badge { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; color: var(--muted); border: 1px dashed var(--rule-strong); padding: 2px 8px; border-radius: 999px; }
 
   footer {
-    padding: 40px 0 48px;
-    text-align: center;
-    color: var(--text-dim);
-    font-size: 13px;
-    border-top: 1px solid var(--border-dim);
+    border-top: 1px solid var(--rule-strong);
+    padding: 26px 0 44px;
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--muted);
   }
-  footer a:hover { text-decoration: underline; }
+  footer a { border-bottom: 1px solid transparent; }
+  footer a:hover { color: var(--accent); border-color: var(--accent); }
+  footer .links { display: flex; gap: 18px; }
 
-  .fade { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
-  .fade.visible { opacity: 1; transform: none; }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .anim { animation: rise .7s var(--ease) both; animation-delay: calc(var(--i, 0) * 60ms); }
 
-  @media (max-width: 640px) {
-    .hero { padding: 64px 0 48px; }
-    .hero h1 { font-size: 32px; }
-    section { padding: 44px 0; }
+  @media (max-width: 900px) {
+    .shell { grid-template-columns: 1fr; gap: 0; }
+    .rail {
+      position: static; height: auto; border-right: 0;
+      border-bottom: 1px solid var(--rule-strong);
+      padding: 36px 0 30px;
+    }
+    .rail h1 { font-size: 34px; }
+    .lede { max-width: 46ch; }
+    .rail-body { margin-top: 26px; }
+    .rail-nav a { padding: 10px 0; }
+    .rail-foot { margin-top: 20px; padding-top: 0; }
+    main { padding-top: 20px; }
+    .filters { padding: 12px 0; margin-bottom: 26px; }
+    .plates { grid-template-columns: 1fr; }
+    .plate { padding-bottom: 22px; }
+    .plate-foot { padding-top: 16px; }
+  }
+  @media (max-width: 620px) {
+    .flabel { display: none; }
+    .fcount { font-size: 10px; }
+    .row { grid-template-columns: 30px minmax(0, 1fr); padding: 20px 0; }
+    .row-meta { grid-column: 2; padding-top: 10px; justify-content: flex-start; }
+    .row .no { padding-top: 4px; }
+    .row .desc { font-size: 13px; }
+    .sec-head { margin-bottom: 24px; }
+    footer { flex-direction: column; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
   }
 </style>
-<meta name="msvalidate.01" content="7CC5F80953B78F78F664A58A171CC826" />
 </head>
 <body>
+<div class="progress" aria-hidden="true"><i id="bar"></i></div>
+<a class="skip" href="#main">跳到主要内容</a>
 
-<header class="hero">
-  <div class="container">
-    <div class="avatar"><img src="https://avatars.githubusercontent.com/u/63698328?v=4&s=192" alt="illagerCPR 头像" width="96" height="96"></div>
-    <h1>illagerCPR <span class="cname">无名之迹</span></h1>
-    <p class="tagline">程序开发 · Web 工具 · 趣味实验</p>
-    <p class="intro">
-      这里汇集了我的一些网页项目与开源项目。所有网页项目均为纯前端实现，
-      无需后端、无需联网即可使用，数据不会离开你的浏览器。
-    </p>
-    <div class="links">
-      <a class="link" href="https://github.com/illagerCPR" target="_blank" rel="noopener">
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-        github.com/illagerCPR
-      </a>
-      <a class="link blog" href="https://illagercpr.github.io/blog/">
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758l8.61-8.61Zm.176 4.823L9.75 4.81l-6.286 6.287a.253.253 0 0 0-.064.108l-.558 1.953 1.953-.558a.253.253 0 0 0 .108-.064Zm1.238-3.763a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354Z"/></svg>
-        博客 <span class="en">BLOG</span>
-      </a>
+<div class="shell">
+  <aside class="rail">
+    <div>
+      <p class="eyebrow"><span>00</span><span>INDEX</span></p>
+      <img class="avatar" src="https://avatars.githubusercontent.com/u/63698328?v=4&amp;s=192" width="52" height="52" alt="illagerCPR 头像">
+      <h1>illagerCPR</h1>
+      <p class="cn">无名之迹</p>
+      <p class="lede">程序开发 · Web 工具 · 趣味实验。<br>这里的网页项目均为<b>纯前端实现</b>，无需后端与联网，数据不离开你的浏览器。</p>
     </div>
-  </div>
-</header>
 
-<main class="container">
-
-  <section id="web">
-    <div class="section-head">
-      <h2>网页项目</h2>
-      <span class="en">WEB PROJECTS</span>
+    <div class="rail-body">
+      <nav class="rail-nav" aria-label="页面导航">
+        <a href="#web"><span class="n">01</span><span>网页项目</span><span class="c" data-nav-count="web">04</span></a>
+        <a href="#oss"><span class="n">02</span><span>开源项目</span><span class="c" data-nav-count="oss">09</span></a>
+      </nav>
+      <div class="rail-links">
+        <a href="https://github.com/illagerCPR" target="_blank" rel="me noopener">GitHub <span class="arr" aria-hidden="true">↗</span></a>
+        <a href="https://illagercpr.github.io/blog/" target="_blank" rel="noopener">博客 BLOG <span class="arr" aria-hidden="true">↗</span></a>
+      </div>
     </div>
-    <p class="section-sub">可直接在线体验的网页应用</p>
-    <div class="grid">
 
-      <a class="card fade" href="https://illagercpr.github.io/watermark/" target="_blank" rel="noopener">
-        <div class="card-title"><h3>watermark</h3></div>
-        <p>一个纯前端的图片水印工具，可将多行文本以平铺方式叠加到图片上作为水印，并支持 DFT 频域盲水印与批量处理。零依赖、无需安装、无需联网，所有处理均在浏览器本地完成，图片不会上传到任何服务器。</p>
-        <div class="meta"><span class="tag">图片工具</span><span class="tag green">本地处理</span></div>
-      </a>
+    <div class="rail-foot">
+      <p class="stamp">纯静态 · 0 依赖<br>GitHub Pages</p>
+      <button class="theme" id="theme" type="button" aria-pressed="false"><span class="dot" aria-hidden="true"></span><span id="theme-label">深色</span></button>
+    </div>
+  </aside>
 
-      <a class="card fade" href="https://illagercpr.github.io/earth-airline-test/" target="_blank" rel="noopener">
-        <div class="card-title"><h3>earth-airline-test</h3></div>
-        <p>一个 HTML 文件做成的可上线的 3D 航班可视化，使用 Three.js 做可旋转地球，平滑模拟飞机实时位置，适配手机和电脑。</p>
-        <div class="meta"><span class="tag">3D 可视化</span><span class="tag purple">Three.js</span></div>
-      </a>
+  <main id="main">
+    <div class="filters" role="group" aria-label="筛选项目">
+      <span class="flabel">FILTER</span>
+      <div class="fscroll">
+        <button class="fchip" type="button" data-filter="all" aria-pressed="true">全部</button>
+        <button class="fchip" type="button" data-filter="web" aria-pressed="false">网页应用</button>
+        <button class="fchip" type="button" data-filter="js" aria-pressed="false">JavaScript</button>
+        <button class="fchip" type="button" data-filter="py" aria-pressed="false">Python</button>
+        <button class="fchip" type="button" data-filter="java" aria-pressed="false">Java</button>
+        <button class="fchip" type="button" data-filter="rust" aria-pressed="false">Rust</button>
+        <button class="fchip" type="button" data-filter="node" aria-pressed="false">Node.js</button>
+      </div>
+      <span class="fcount" aria-live="polite"><b id="shown">13</b> / 13 项</span>
+    </div>
 
-      <a class="card fade" href="https://illagercpr.github.io/10492/" target="_blank" rel="noopener">
-        <div class="card-title"><h3>10492</h3></div>
-        <p>做好心理准备。</p>
-      </a>
+    <section class="sect" id="web" data-section="web" aria-labelledby="web-title">
+      <header class="sec-head anim" style="--i:0">
+        <p class="kicker"><span class="idx">01</span><span class="lbl">/ WEB PROJECTS</span><span class="meta-count" data-count="web">04</span></p>
+        <h2 id="web-title">网页项目</h2>
+        <p class="sub">打开即用的纯前端应用，全部在浏览器本地运行。</p>
+      </header>
 
-      <a class="card fade" href="https://illagercpr.github.io/earth-airline-rx/" target="_blank" rel="noopener">
-        <div class="card-title"><h3>earth-airline-rx</h3></div>
-        <p>earth-airline-test 的 Reasonix 版本。</p>
-        <div class="meta"><span class="tag">3D 可视化</span><span class="tag purple">Reasonix</span></div>
-      </a>
+      <div class="plates">
+        <a class="plate entry anim" data-kind="web" data-stack="js" style="--i:1" href="https://illagercpr.github.io/watermark/" target="_blank" rel="noopener">
+          <div class="plate-top"><span>01</span><span class="live"><i aria-hidden="true"></i>LIVE</span></div>
+          <h3>watermark</h3>
+          <p class="desc">纯前端图片水印工具：多行文本平铺、DFT 频域盲水印（无需原图提取）、批量处理。零依赖，图片不会离开浏览器。</p>
+          <div class="tags"><span class="tag">图片工具</span><span class="tag">本地处理</span></div>
+          <div class="plate-foot">
+            <code>illagercpr.github.io/watermark</code>
+            <span class="go">打开 <span class="arrow" aria-hidden="true">↗</span></span>
+          </div>
+        </a>
 
-      <div class="card soon fade">
-        <span class="badge">即将上线</span>
-        <div class="card-title"><h3>新的网页项目</h3></div>
-        <p>这里将为未来的网页项目预留位置。</p>
+        <a class="plate entry anim" data-kind="web" data-stack="js" style="--i:2" href="https://illagercpr.github.io/earth-airline-test/" target="_blank" rel="noopener">
+          <div class="plate-top"><span>02</span><span class="live"><i aria-hidden="true"></i>LIVE</span></div>
+          <h3>earth-airline-test</h3>
+          <p class="desc">一个 HTML 文件完成的 3D 航班可视化：Three.js 可旋转地球、平滑模拟实时航迹，手机与桌面自适应。</p>
+          <div class="tags"><span class="tag">3D 可视化</span><span class="tag">Three.js</span></div>
+          <div class="plate-foot">
+            <code>illagercpr.github.io/earth-airline-test</code>
+            <span class="go">打开 <span class="arrow" aria-hidden="true">↗</span></span>
+          </div>
+        </a>
       </div>
 
-    </div>
-  </section>
+      <ul class="rows">
+        <li class="row-item entry anim" data-kind="web" data-stack="" style="--i:3">
+          <a class="row" href="https://illagercpr.github.io/10492/" target="_blank" rel="noopener">
+            <span class="no">03</span>
+            <div>
+              <h3>10492</h3>
+              <p class="desc">做好心理准备。</p>
+            </div>
+            <div class="row-meta"><span class="lang"><i aria-hidden="true" style="background: var(--accent)"></i>LIVE</span><span class="arrow" aria-hidden="true">→</span></div>
+          </a>
+        </li>
+        <li class="row-item entry anim" data-kind="web" data-stack="js" style="--i:4">
+          <a class="row" href="https://illagercpr.github.io/earth-airline-rx/" target="_blank" rel="noopener">
+            <span class="no">04</span>
+            <div>
+              <h3>earth-airline-rx</h3>
+              <p class="desc">earth-airline-test 的 Reasonix 版本。</p>
+              <div class="tags"><span class="tag">3D 可视化</span><span class="tag">Reasonix</span></div>
+            </div>
+            <div class="row-meta"><span class="lang"><i aria-hidden="true" style="background: var(--accent)"></i>LIVE</span><span class="arrow" aria-hidden="true">→</span></div>
+          </a>
+        </li>
+        <li class="row-item soon-item anim" data-kind="web" data-stack="" style="--i:5">
+          <div class="row soon">
+            <span class="no">--</span>
+            <div>
+              <h3>新的网页项目 <span class="soon-badge">即将上线</span></h3>
+              <p class="desc">这里将为未来的网页项目预留位置。</p>
+            </div>
+            <div class="row-meta"></div>
+          </div>
+        </li>
+      </ul>
+    </section>
 
-  <section id="opensource">
-    <div class="section-head">
-      <h2>开源项目</h2>
-      <span class="en">OPEN SOURCE</span>
-    </div>
-    <p class="section-sub">托管在 GitHub 上的开源仓库</p>
-    <div class="grid">
+    <section class="sect" id="oss" data-section="oss" aria-labelledby="oss-title">
+      <header class="sec-head">
+        <p class="kicker"><span class="idx">02</span><span class="lbl">/ OPEN SOURCE</span><span class="meta-count" data-count="oss">09</span></p>
+        <h2 id="oss-title">开源项目</h2>
+        <p class="sub">托管在 GitHub 上的仓库，按语言标注技术栈。</p>
+      </header>
 
-      <a class="card fade" href="https://github.com/illagerCPR/watermark" target="_blank" rel="noopener">
-        <div class="card-title"><h3>watermark</h3></div>
-        <p>纯前端图片水印工具：支持多行文本平铺水印、DFT 频域盲水印（无需原图即可提取）与批量处理。基于 Canvas API，零依赖、零外部库。</p>
-        <div class="meta"><span class="tag">JavaScript</span><span class="tag green">图片处理</span><span class="tag purple">Canvas</span></div>
-      </a>
+      <ul class="rows">
+        <li class="row-item entry" data-kind="oss" data-stack="js">
+          <a class="row feature" href="https://github.com/illagerCPR/Tiderift" target="_blank" rel="noopener">
+            <span class="no">05</span>
+            <div>
+              <h3>Tiderift</h3>
+              <p class="desc">网页版 3D 沙盒游戏（原 CubeWorld）：程序化无限世界，主世界／下界／末地／天域多维度，挖掘放置合成、体素光照与昼夜循环、怪物与红石、村庄要塞与村民交易，11 种语言界面，多槽位本地存档并可局域网联机。Vite + Three.js 纯前端实现。</p>
+              <div class="tags"><span class="tag">JavaScript</span><span class="tag">Three.js</span><span class="tag">局域网联机</span></div>
+            </div>
+            <div class="row-meta"><span class="lang js"><i aria-hidden="true"></i>JavaScript</span><span class="arrow" aria-hidden="true">→</span></div>
+          </a>
+        </li>
+        <li class="row-item entry" data-kind="oss" data-stack="js">
+          <a class="row" href="https://github.com/illagerCPR/watermark" target="_blank" rel="noopener">
+            <span class="no">06</span>
+            <div>
+              <h3>watermark</h3>
+              <p class="desc">纯前端图片水印工具：多行文本平铺、DFT 频域盲水印与批量处理，基于 Canvas API，零外部库。</p>
+              <div class="tags"><span class="tag">图片处理</span><span class="tag">Canvas</span></div>
+            </div>
+            <div class="row-meta"><span class="lang js"><i aria-hidden="true"></i>JavaScript</span><span class="arrow" aria-hidden="true">→</span></div>
+          </a>
+        </li>
+        <li class="row-item entry" data-kind="oss" data-stack="rust">
+          <a class="row" href="https://github.com/illagerCPR/keyshow" target="_blank" rel="noopener">
+            <span class="no">07</span>
+            <div>
+              <h3>keyshow</h3>
+              <p class="desc">桌面端键盘、鼠标与手柄操作实时监控：组合键、滚轮、Xbox / PS / NS 手柄实时显示，窗口贴边吸附与自定义设置。</p>
+              <div class="tags"><span class="tag">Vue 3</span><span class="tag">Tauri 2</span><span class="tag">Win32</span></div>
+            </div>
+            <div class="row-meta"><span class="lang rust"><i aria-hidden="true"></i>Rust</span><span class="arrow" aria-hidden="true">→</span></div>
+          </a>
+        </li>
+        <li class="row-item entry" data-kind="oss" data-stack="py">
+          <a class="row" href="https://github.com/illagerCPR/hanoi" target="_blank" rel="noopener">
+            <span class="no">08</span>
+            <div>
+              <h3>hanoi</h3>
+              <p class="desc">汉诺塔游戏，GUI 与 CLI 双模式：3～10 盘自适应、点击／拖拽移动、自动演示、计分与求解动画，基于 Python 标准库。</p>
+              <div class="tags"><span class="tag">tkinter</span><span class="tag">GUI + CLI</span></div>
+            </div>
+            <div class="row-meta"><span class="lang py"><i aria-hidden="true"></i>Python</span><span class="arrow" aria-hidden="true">→</span></div>
+          </a>
+        </li>
+        <li class="row-item entry" data-kind="oss" data-stack="py">
+          <a class="row" href="https://github.com/illagerCPR/deepseek-harness-startup" target="_blank" rel="noopener">
+            <span class="no">09</span>
+            <div>
+              <h3>deepseek-harness-startup</h3>
+              <p class="desc">Windows GUI 启动器：一键启动 DeepSeek Harness WebUI，支持本机与 LAN 模式，隐藏控制台常驻运行，可在桌面创建快捷方式。</p>
+              <div class="tags"><span class="tag">PyInstaller</span><span class="tag">Windows GUI</span></div>
+            </div>
+            <div class="row-meta"><span class="lang py"><i aria-hidden="true"></i>Python</span><span class="arrow" aria-hidden="true">→</span></div>
+          </a>
+        </li>
+        <li class="row-item entry" data-kind="oss" data-stack="py">
+          <a class="row" href="https://github.com/illagerCPR/video-watermark" target="_blank" rel="noopener">
+            <span class="no">10</span>
+            <div>
+              <h3>video-watermark</h3>
+              <p class="desc">桌面视频水印软件：全屏平铺（文字／图片、可旋转）与 6 种移动轨迹，实时预览、批量处理与编码控制，Python + ffmpeg，支持 GPU 加速。</p>
+              <div class="tags"><span class="tag">ffmpeg</span><span class="tag">GPU 加速</span></div>
+            </div>
+            <div class="row-meta"><span class="lang py"><i aria-hidden="true"></i>Python</span><span class="arrow" aria-hidden="true">→</span></div>
+          </a>
+        </li>
+        <li class="row-item entry" data-kind="oss" data-stack="node">
+          <a class="row" href="https://github.com/illagerCPR/LAN-Drop" target="_blank" rel="noopener">
+            <span class="no">11</span>
+            <div>
+              <h3>LAN-Drop</h3>
+              <p class="desc">局域网文件与文字传输：PC 作服务端、Android 作客户端，扫码／扫描／手输配对，文件走 HTTP 断点续传，数据不出局域网。</p>
+              <div class="tags"><span class="tag">Kotlin</span><span class="tag">局域网传输</span></div>
+            </div>
+            <div class="row-meta"><span class="lang node"><i aria-hidden="true"></i>Node.js</span><span class="arrow" aria-hidden="true">→</span></div>
+          </a>
+        </li>
+        <li class="row-item entry" data-kind="oss" data-stack="java">
+          <a class="row" href="https://github.com/illagerCPR/the-truth" target="_blank" rel="noopener">
+            <span class="no">12</span>
+            <div>
+              <h3>the-truth</h3>
+              <p class="desc">AE2 终局扩展（Minecraft 1.21.1 / NeoForge）：新增「确界」维度与量子入口，覆盖决定稳定性，维度产物反向增强主世界 AE2，永不静默删除玩家物品。</p>
+              <div class="tags"><span class="tag">NeoForge</span><span class="tag">AE2 扩展</span></div>
+            </div>
+            <div class="row-meta"><span class="lang java"><i aria-hidden="true"></i>Java</span><span class="arrow" aria-hidden="true">→</span></div>
+          </a>
+        </li>
+        <li class="row-item entry" data-kind="oss" data-stack="java">
+          <a class="row" href="https://github.com/illagerCPR/creative-container" target="_blank" rel="noopener">
+            <span class="no">13</span>
+            <div>
+              <h3>creative-container</h3>
+              <p class="desc">整合包终局方块：像创造模式物品栏一样搜索取物，容器池物品不限量，可被 ME 存储总线与漏斗／Pipez／Create 抽取，并写入 ProjectE EMC。</p>
+              <div class="tags"><span class="tag">NeoForge</span><span class="tag">整合包终局</span></div>
+            </div>
+            <div class="row-meta"><span class="lang java"><i aria-hidden="true"></i>Java</span><span class="arrow" aria-hidden="true">→</span></div>
+          </a>
+        </li>
+      </ul>
+    </section>
 
-      <a class="card fade" href="https://github.com/illagerCPR/keyshow" target="_blank" rel="noopener">
-        <div class="card-title"><h3>keyshow</h3></div>
-        <p>桌面端键盘、鼠标与手柄操作实时监控工具。支持键盘按键与组合键、鼠标滚动、手柄（Xbox / PS / NS）实时显示，窗口可贴边吸附、自定义设置。</p>
-        <div class="meta"><span class="tag">Rust</span><span class="tag">Vue 3</span><span class="tag">Tauri 2</span><span class="tag green">Win32</span></div>
-      </a>
-
-      <a class="card fade" href="https://github.com/illagerCPR/hanoi" target="_blank" rel="noopener">
-        <div class="card-title"><h3>hanoi</h3></div>
-        <p>汉诺塔（Hanoi Tower）游戏，提供 GUI 与 CLI 双模式。支持 3~10 盘自适应、点击/拖拽移动、自动演示、计分系统与求解动画，基于 Python 标准库与 tkinter，零依赖。</p>
-        <div class="meta"><span class="tag">Python</span><span class="tag purple">tkinter</span><span class="tag green">GUI + CLI</span></div>
-      </a>
-
-      <a class="card fade" href="https://github.com/illagerCPR/deepseek-harness-startup" target="_blank" rel="noopener">
-        <div class="card-title"><h3>deepseek-harness-startup</h3></div>
-        <p>Windows GUI 启动程序：一键启动 DeepSeek Harness WebUI，支持本机模式与开放连接（LAN）模式，并可在 Public 桌面创建快捷方式。基于 Python + PyInstaller，隐藏控制台启动，关闭窗口后 WebUI 继续运行。</p>
-        <div class="meta"><span class="tag">Python</span><span class="tag purple">PyInstaller</span><span class="tag green">Windows GUI</span></div>
-      </a>
-
-      <a class="card fade" href="https://github.com/illagerCPR/video-watermark" target="_blank" rel="noopener">
-        <div class="card-title"><h3>video-watermark</h3></div>
-        <p>桌面 GUI 视频水印软件：支持全屏平铺水印（文字/图片、可旋转角度）与移动水印（6 种预设轨迹），提供实时预览、批量处理与输出编码控制。基于 Python + ffmpeg，支持 GPU 硬件加速与并行帧流水线。</p>
-        <div class="meta"><span class="tag">Python</span><span class="tag purple">ffmpeg</span><span class="tag green">GPU 加速</span></div>
-      </a>
-
-      <a class="card fade" href="https://github.com/illagerCPR/Tiderift" target="_blank" rel="noopener">
-        <div class="card-title"><h3>Tiderift</h3></div>
-        <p>网页版 3D 沙盒游戏（Web 版我的世界，原 CubeWorld）：程序化生成无限世界，支持主世界/下界/末地/天域多维度、挖掘放置合成、体素光照与昼夜循环、怪物与红石电路、村庄要塞生成与村民交易，11 种语言界面，多槽位本地存档并可局域网联机。基于 Vite + Three.js 纯前端实现。</p>
-        <div class="meta"><span class="tag">JavaScript</span><span class="tag purple">Three.js</span><span class="tag green">局域网联机</span></div>
-      </a>
-
-      <a class="card fade" href="https://github.com/illagerCPR/LAN-Drop" target="_blank" rel="noopener">
-        <div class="card-title"><h3>LAN-Drop</h3></div>
-        <p>局域网文件与文字传输工具，替代已下线的 Edge Drop：PC 作为服务端、Android 作为客户端，支持扫码/扫描/手输配对与指纹固定，文件走 HTTP 断点续传、控制面走 WebSocket，数据不出局域网，无云服务与账号。</p>
-        <div class="meta"><span class="tag">Node.js</span><span class="tag purple">Kotlin</span><span class="tag green">局域网传输</span></div>
-      </a>
-
-      <a class="card fade" href="https://github.com/illagerCPR/the-truth" target="_blank" rel="noopener">
-        <div class="card-title"><h3>the-truth</h3></div>
-        <p>Applied Energistics 2 的终局扩展模组（Minecraft 1.21.1 / NeoForge）：新增「确界」维度与量子入口，未覆盖区域的物质不稳定、深层按删除曲线溶解，需铺设确定性覆盖才能安全作业，维度产物反向增强主世界 AE2 能力。永不静默删除玩家物品。</p>
-        <div class="meta"><span class="tag">Java</span><span class="tag purple">NeoForge</span><span class="tag green">AE2 扩展</span></div>
-      </a>
-
-      <a class="card fade" href="https://github.com/illagerCPR/creative-container" target="_blank" rel="noopener">
-        <div class="card-title"><h3>creative-container</h3></div>
-        <p>专供整合包的 Minecraft 终局方块：像创造模式物品栏一样搜索取物（支持拼音），放进容器池的物品从此不限量，供 AE2 ME 存储总线或漏斗/Pipez/Create 等管道按需抽取，并自动写入 ProjectE 自定义 EMC。不提供默认配方。</p>
-        <div class="meta"><span class="tag">Java</span><span class="tag purple">NeoForge</span><span class="tag green">整合包终局</span></div>
-      </a>
-
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <div class="container">
-    <p>© <span id="year"></span> illagerCPR · <a href="https://github.com/illagerCPR" target="_blank" rel="noopener">GitHub</a> · 由 GitHub Pages 托管</p>
-  </div>
-</footer>
+    <footer>
+      <p>© <span id="year">2026</span> illagerCPR · 由 GitHub Pages 托管</p>
+      <div class="links">
+        <a href="https://github.com/illagerCPR" target="_blank" rel="me noopener">GitHub ↗</a>
+        <a href="https://illagercpr.github.io/blog/" target="_blank" rel="noopener">博客 ↗</a>
+        <a href="#main">回到顶部 ↑</a>
+      </div>
+    </footer>
+  </main>
+</div>
 
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade').forEach((el) => observer.observe(el));
-</script>
+  (function () {
+    var root = document.documentElement;
+    var themeBtn = document.getElementById('theme');
+    var themeLabel = document.getElementById('theme-label');
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
 
+    function storedTheme() {
+      try { return localStorage.getItem('theme'); } catch (e) { return null; }
+    }
+    function applyTheme(theme) {
+      root.dataset.theme = theme;
+      var dark = theme === 'dark';
+      themeBtn.setAttribute('aria-pressed', String(dark));
+      themeLabel.textContent = dark ? '浅色' : '深色';
+    }
+    applyTheme(storedTheme() || (mq.matches ? 'dark' : 'light'));
+    if (mq.addEventListener) {
+      mq.addEventListener('change', function (e) {
+        if (!storedTheme()) applyTheme(e.matches ? 'dark' : 'light');
+      });
+    }
+    themeBtn.addEventListener('click', function () {
+      var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      applyTheme(next);
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    var avatar = document.querySelector('.avatar');
+    var avatarFallback = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><rect width="96" height="96" fill="#6f685c"/><text x="48" y="61" font-family="monospace" font-size="34" fill="#f3f0e9" text-anchor="middle">iC</text></svg>'
+    );
+    function useAvatarFallback() {
+      if (avatar && avatar.src !== avatarFallback) avatar.src = avatarFallback;
+    }
+    if (avatar) {
+      avatar.addEventListener('error', useAvatarFallback, { once: true });
+      if (avatar.complete && avatar.naturalWidth === 0) useAvatarFallback();
+    }
+
+    var bar = document.getElementById('bar');
+    function onScroll() {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, window.scrollY / max) : 0) + ')';
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+
+    var items = Array.prototype.slice.call(document.querySelectorAll('[data-kind]'));
+    var sections = Array.prototype.slice.call(document.querySelectorAll('[data-section]'));
+    var navCounts = Array.prototype.slice.call(document.querySelectorAll('[data-nav-count]'));
+    var shownEl = document.getElementById('shown');
+    var totals = { web: 4, oss: 9 };
+
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+    function applyFilter(filter) {
+      var counts = { web: 0, oss: 0 };
+      var total = 0;
+
+      items.forEach(function (el) {
+        var match = filter === 'all' || el.dataset.kind === filter || el.dataset.stack === filter;
+        el.hidden = !match;
+        if (match && el.classList.contains('entry')) {
+          counts[el.dataset.kind]++;
+          total++;
+        }
+      });
+
+      sections.forEach(function (section) {
+        var key = section.dataset.section;
+        section.hidden = counts[key] === 0;
+        var countEl = section.querySelector('[data-count]');
+        if (countEl) {
+          countEl.textContent = filter === 'all' ? pad(counts[key]) : pad(counts[key]) + ' / ' + pad(totals[key]);
+        }
+      });
+
+      navCounts.forEach(function (el) {
+        var key = el.dataset.navCount;
+        var link = el.closest('a');
+        var empty = counts[key] === 0;
+        el.textContent = pad(counts[key]);
+        link.setAttribute('aria-disabled', String(empty));
+        if (empty) link.setAttribute('tabindex', '-1');
+        else link.removeAttribute('tabindex');
+      });
+
+      document.querySelectorAll('[data-filter]').forEach(function (btn) {
+        btn.setAttribute('aria-pressed', String(btn.dataset.filter === filter));
+      });
+
+      shownEl.textContent = pad(total);
+    }
+
+    document.querySelectorAll('[data-filter]').forEach(function (btn) {
+      btn.addEventListener('click', function () { applyFilter(btn.dataset.filter); });
+    });
+  })();
+</script>
 </body>
 </html>
