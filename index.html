@@ -211,6 +211,7 @@
   .plate h3 {
     margin-top: 18px; font-size: clamp(22px, 2.4vw, 27px);
     font-weight: 600; letter-spacing: -.02em; line-height: 1.2;
+    display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px;
     transition: color .2s var(--ease);
   }
   .plate:hover h3 { color: var(--accent); }
@@ -232,6 +233,16 @@
     background: var(--chip); border: 1px solid var(--rule);
     padding: 2px 8px; border-radius: 3px;
   }
+  .lic {
+    flex: none;
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .06em;
+    color: var(--muted); border: 1px solid var(--rule); border-radius: 3px;
+    padding: 1px 6px; line-height: 1.6; white-space: nowrap;
+  }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
 
   .rows { list-style: none; margin-top: 8px; }
   .row-item { border-top: 1px solid var(--rule); }
@@ -246,7 +257,7 @@
   .row .no { font-family: var(--mono); font-size: 11px; color: var(--muted); padding-top: 6px; }
   .row h3 {
     font-size: 16.5px; font-weight: 600; letter-spacing: -.01em;
-    display: flex; align-items: center; gap: 8px;
+    display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px;
     transition: color .2s var(--ease);
   }
   .row:hover h3 { color: var(--accent); }
@@ -335,7 +346,8 @@
     <div class="rail-body">
       <nav class="rail-nav" aria-label="页面导航">
         <a href="#web"><span class="n">01</span><span>网页项目</span><span class="c" data-nav-count="web">04</span></a>
-        <a href="#oss"><span class="n">02</span><span>开源项目</span><span class="c" data-nav-count="oss">09</span></a>
+        <a href="#oss"><span class="n">02</span><span>开源项目</span><span class="c" data-nav-count="oss">10</span></a>
+        <a href="#fork"><span class="n">03</span><span>分支项目</span><span class="c" data-nav-count="fork">01</span></a>
       </nav>
       <div class="rail-links">
         <a href="https://github.com/illagerCPR" target="_blank" rel="me noopener">GitHub <span class="arr" aria-hidden="true">↗</span></a>
@@ -355,13 +367,15 @@
       <div class="fscroll">
         <button class="fchip" type="button" data-filter="all" aria-pressed="true">全部</button>
         <button class="fchip" type="button" data-filter="web" aria-pressed="false">网页应用</button>
+        <button class="fchip" type="button" data-filter="oss" aria-pressed="false">开源项目</button>
+        <button class="fchip" type="button" data-filter="fork" aria-pressed="false">分支项目</button>
         <button class="fchip" type="button" data-filter="js" aria-pressed="false">JavaScript</button>
         <button class="fchip" type="button" data-filter="py" aria-pressed="false">Python</button>
         <button class="fchip" type="button" data-filter="java" aria-pressed="false">Java</button>
         <button class="fchip" type="button" data-filter="rust" aria-pressed="false">Rust</button>
         <button class="fchip" type="button" data-filter="node" aria-pressed="false">Node.js</button>
       </div>
-      <span class="fcount" aria-live="polite"><b id="shown">13</b> / 13 项</span>
+      <span class="fcount" aria-live="polite"><b id="shown">15</b> / 15 项</span>
     </div>
 
     <section class="sect" id="web" data-section="web" aria-labelledby="web-title">
@@ -374,7 +388,7 @@
       <div class="plates">
         <a class="plate entry anim" data-kind="web" data-stack="js" style="--i:1" href="https://illagercpr.github.io/watermark/" target="_blank" rel="noopener">
           <div class="plate-top"><span>01</span><span class="live"><i aria-hidden="true"></i>LIVE</span></div>
-          <h3>watermark</h3>
+          <h3>watermark <span class="lic" title="The Unlicense"><span class="sr-only">许可协议：</span>Unlicense</span></h3>
           <p class="desc">纯前端图片水印工具：多行文本平铺、DFT 频域盲水印（无需原图提取）、批量处理。零依赖，图片不会离开浏览器。</p>
           <div class="tags"><span class="tag">图片工具</span><span class="tag">本地处理</span></div>
           <div class="plate-foot">
@@ -432,7 +446,7 @@
 
     <section class="sect" id="oss" data-section="oss" aria-labelledby="oss-title">
       <header class="sec-head">
-        <p class="kicker"><span class="idx">02</span><span class="lbl">/ OPEN SOURCE</span><span class="meta-count" data-count="oss">09</span></p>
+        <p class="kicker"><span class="idx">02</span><span class="lbl">/ OPEN SOURCE</span><span class="meta-count" data-count="oss">10</span></p>
         <h2 id="oss-title">开源项目</h2>
         <p class="sub">托管在 GitHub 上的仓库，按语言标注技术栈。</p>
       </header>
@@ -453,7 +467,7 @@
           <a class="row" href="https://github.com/illagerCPR/watermark" target="_blank" rel="noopener">
             <span class="no">06</span>
             <div>
-              <h3>watermark</h3>
+              <h3>watermark <span class="lic" title="The Unlicense"><span class="sr-only">许可协议：</span>Unlicense</span></h3>
               <p class="desc">纯前端图片水印工具：多行文本平铺、DFT 频域盲水印与批量处理，基于 Canvas API，零外部库。</p>
               <div class="tags"><span class="tag">图片处理</span><span class="tag">Canvas</span></div>
             </div>
@@ -464,7 +478,7 @@
           <a class="row" href="https://github.com/illagerCPR/keyshow" target="_blank" rel="noopener">
             <span class="no">07</span>
             <div>
-              <h3>keyshow</h3>
+              <h3>keyshow <span class="lic" title="The Unlicense"><span class="sr-only">许可协议：</span>Unlicense</span></h3>
               <p class="desc">桌面端键盘、鼠标与手柄操作实时监控：组合键、滚轮、Xbox / PS / NS 手柄实时显示，窗口贴边吸附与自定义设置。</p>
               <div class="tags"><span class="tag">Vue 3</span><span class="tag">Tauri 2</span><span class="tag">Win32</span></div>
             </div>
@@ -475,7 +489,7 @@
           <a class="row" href="https://github.com/illagerCPR/hanoi" target="_blank" rel="noopener">
             <span class="no">08</span>
             <div>
-              <h3>hanoi</h3>
+              <h3>hanoi <span class="lic" title="The Unlicense"><span class="sr-only">许可协议：</span>Unlicense</span></h3>
               <p class="desc">汉诺塔游戏，GUI 与 CLI 双模式：3～10 盘自适应、点击／拖拽移动、自动演示、计分与求解动画，基于 Python 标准库。</p>
               <div class="tags"><span class="tag">tkinter</span><span class="tag">GUI + CLI</span></div>
             </div>
@@ -486,7 +500,7 @@
           <a class="row" href="https://github.com/illagerCPR/deepseek-harness-startup" target="_blank" rel="noopener">
             <span class="no">09</span>
             <div>
-              <h3>deepseek-harness-startup</h3>
+              <h3>deepseek-harness-startup <span class="lic" title="The Unlicense"><span class="sr-only">许可协议：</span>Unlicense</span></h3>
               <p class="desc">Windows GUI 启动器：一键启动 DeepSeek Harness WebUI，支持本机与 LAN 模式，隐藏控制台常驻运行，可在桌面创建快捷方式。</p>
               <div class="tags"><span class="tag">PyInstaller</span><span class="tag">Windows GUI</span></div>
             </div>
@@ -497,7 +511,7 @@
           <a class="row" href="https://github.com/illagerCPR/video-watermark" target="_blank" rel="noopener">
             <span class="no">10</span>
             <div>
-              <h3>video-watermark</h3>
+              <h3>video-watermark <span class="lic" title="The Unlicense"><span class="sr-only">许可协议：</span>Unlicense</span></h3>
               <p class="desc">桌面视频水印软件：全屏平铺（文字／图片、可旋转）与 6 种移动轨迹，实时预览、批量处理与编码控制，Python + ffmpeg，支持 GPU 加速。</p>
               <div class="tags"><span class="tag">ffmpeg</span><span class="tag">GPU 加速</span></div>
             </div>
@@ -508,7 +522,7 @@
           <a class="row" href="https://github.com/illagerCPR/LAN-Drop" target="_blank" rel="noopener">
             <span class="no">11</span>
             <div>
-              <h3>LAN-Drop</h3>
+              <h3>LAN-Drop <span class="lic" title="MIT License"><span class="sr-only">许可协议：</span>MIT</span></h3>
               <p class="desc">局域网文件与文字传输：PC 作服务端、Android 作客户端，扫码／扫描／手输配对，文件走 HTTP 断点续传，数据不出局域网。</p>
               <div class="tags"><span class="tag">Kotlin</span><span class="tag">局域网传输</span></div>
             </div>
@@ -519,7 +533,7 @@
           <a class="row" href="https://github.com/illagerCPR/the-truth" target="_blank" rel="noopener">
             <span class="no">12</span>
             <div>
-              <h3>the-truth</h3>
+              <h3>the-truth <span class="lic" title="GNU Lesser General Public License v3.0"><span class="sr-only">许可协议：</span>LGPL-3.0</span></h3>
               <p class="desc">AE2 终局扩展（Minecraft 1.21.1 / NeoForge）：新增「确界」维度与量子入口，覆盖决定稳定性，维度产物反向增强主世界 AE2，永不静默删除玩家物品。</p>
               <div class="tags"><span class="tag">NeoForge</span><span class="tag">AE2 扩展</span></div>
             </div>
@@ -530,9 +544,42 @@
           <a class="row" href="https://github.com/illagerCPR/creative-container" target="_blank" rel="noopener">
             <span class="no">13</span>
             <div>
-              <h3>creative-container</h3>
+              <h3>creative-container <span class="lic" title="GNU Lesser General Public License v3.0"><span class="sr-only">许可协议：</span>LGPL-3.0</span></h3>
               <p class="desc">整合包终局方块：像创造模式物品栏一样搜索取物，容器池物品不限量，可被 ME 存储总线与漏斗／Pipez／Create 抽取，并写入 ProjectE EMC。</p>
               <div class="tags"><span class="tag">NeoForge</span><span class="tag">整合包终局</span></div>
+            </div>
+            <div class="row-meta"><span class="lang java"><i aria-hidden="true"></i>Java</span><span class="arrow" aria-hidden="true">→</span></div>
+          </a>
+        </li>
+        <li class="row-item entry" data-kind="oss" data-stack="java">
+          <a class="row" href="https://github.com/illagerCPR/uncrafting-table-limit" target="_blank" rel="noopener">
+            <span class="no">14</span>
+            <div>
+              <h3>uncrafting-table-limit <span class="lic" title="GNU Lesser General Public License v2.1"><span class="sr-only">许可协议：</span>LGPL-2.1</span></h3>
+              <p class="desc">为暮色森林拆解台加可配置限制的 NeoForge 模组：全局冷却、禁用、方块耐久与物品代价四种模式，服务端判定，用于服务器平衡。</p>
+              <div class="tags"><span class="tag">NeoForge</span><span class="tag">服务器平衡</span><span class="tag">1.21.1</span></div>
+            </div>
+            <div class="row-meta"><span class="lang java"><i aria-hidden="true"></i>Java</span><span class="arrow" aria-hidden="true">→</span></div>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sect" id="fork" data-section="fork" aria-labelledby="fork-title">
+      <header class="sec-head">
+        <p class="kicker"><span class="idx">03</span><span class="lbl">/ FORKS</span><span class="meta-count" data-count="fork">01</span></p>
+        <h2 id="fork-title">分支项目</h2>
+        <p class="sub">从上游接手维护的分支，差异与修复都记录在案。</p>
+      </header>
+
+      <ul class="rows">
+        <li class="row-item entry" data-kind="fork" data-stack="java">
+          <a class="row feature" href="https://github.com/illagerCPR/AppliedE" target="_blank" rel="noopener">
+            <span class="no">15</span>
+            <div>
+              <h3>AppliedE <span class="lic" title="GNU Lesser General Public License v3.0"><span class="sr-only">许可协议：</span>LGPL-3.0</span></h3>
+              <p class="desc">上游 AppliedE 的维护分支：把 ProjectE 的 EMC 接入 AE2 ME 网络；修复层级样板崩溃，新增 transmutationBatchSize 吞吐配置，适配 Minecraft 1.21.1 / NeoForge 与 NeoECO AE、Data Energistics。</p>
+              <div class="tags"><span class="tag">维护分支</span><span class="tag">ProjectE</span><span class="tag">AE2</span><span class="tag">1.21.1</span></div>
             </div>
             <div class="row-meta"><span class="lang java"><i aria-hidden="true"></i>Java</span><span class="arrow" aria-hidden="true">→</span></div>
           </a>
@@ -606,12 +653,12 @@
     var sections = Array.prototype.slice.call(document.querySelectorAll('[data-section]'));
     var navCounts = Array.prototype.slice.call(document.querySelectorAll('[data-nav-count]'));
     var shownEl = document.getElementById('shown');
-    var totals = { web: 4, oss: 9 };
+    var totals = { web: 4, oss: 10, fork: 1 };
 
     function pad(n) { return (n < 10 ? '0' : '') + n; }
 
     function applyFilter(filter) {
-      var counts = { web: 0, oss: 0 };
+      var counts = { web: 0, oss: 0, fork: 0 };
       var total = 0;
 
       items.forEach(function (el) {

@@ -2,7 +2,7 @@
 
 基于 GitHub Pages 的个人主页：https://illagercpr.github.io/
 
-单页纯静态站，零依赖、无构建，手机与桌面自适应。默认跟随系统的明暗偏好，也可以手动切换；项目可按类型或语言筛选。
+单页纯静态站，零依赖、无构建，手机与桌面自适应。默认跟随系统的明暗偏好，也可以手动切换；项目可按类型或语言筛选，有许可协议的项目会标注协议类型。
 
 ## 网页项目
 
@@ -27,6 +27,13 @@
 - [LAN-Drop](https://github.com/illagerCPR/LAN-Drop) — Node.js / Kotlin
 - [the-truth](https://github.com/illagerCPR/the-truth) — Java / NeoForge
 - [creative-container](https://github.com/illagerCPR/creative-container) — Java / NeoForge
+- [uncrafting-table-limit](https://github.com/illagerCPR/uncrafting-table-limit) — Java / NeoForge
+
+## 分支项目
+
+从上游接手维护的分支：
+
+- [AppliedE](https://github.com/illagerCPR/AppliedE) — ProjectE EMC 与 AE2 ME 网络的集成，上游 `62832/AppliedE` 的维护分支
 
 ## 链接
 

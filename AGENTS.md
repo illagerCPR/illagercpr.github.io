@@ -25,21 +25,30 @@ illagerCPR 个人主页仓库（GitHub Pages）。单页纯静态站点，无构
 
 ## 页面结构
 
-- 双栏布局：左栏 `.rail` 是 sticky 身份栏（头像、名字、定位语、章节导航、外链、主题开关）；右栏 `main` 是筛选条 + 两个 section。
-- 两个 section 固定为「网页项目」`#web` 与「开源项目」`#oss`。
-- 网页项目区：2 个 `.plate` 版面 + 2 个目录行 + 1 个 `.soon-item` 占位行。
-- 开源项目区：Tiderift 是 feature 行，其余为普通目录行。
+- 双栏布局：左栏 `.rail` 是 sticky 身份栏（头像、名字、定位语、章节导航、外链、主题开关）；右栏 `main` 是筛选条 + 三个 section。
+- 三个 section 固定为「网页项目」`#web`、「开源项目」`#oss`、「分支项目」`#fork`。
+- 网页项目区：2 个 `.plate` 版面 + 2 个目录行 + 1 个 `.soon-item` 占位行（共 4 个项目）。
+- 开源项目区：Tiderift 是 feature 行，其余为普通目录行（共 10 个项目）。
+- 分支项目区：当前仅 AppliedE（上游 `62832/AppliedE` 的维护分支），文档在本地 `~/projects/AppliedE/wiki`。
 
 ## 增删项目
 
-- 新条目必须带 `.entry` 与 `data-kind="web|oss"`、`data-stack="js|py|java|rust|node"`。筛选与计数依赖这两个属性，漏写会导致条目在筛选时消失或计数错误。
-- 网页项目链接到 `https://illagercpr.github.io/<name>/`，开源项目链接到 `https://github.com/illagerCPR/<name>`，不要混用前缀。
+- 新条目必须带 `.entry` 与 `data-kind="web|oss|fork"`、`data-stack="js|py|java|rust|node"`。筛选与计数依赖这两个属性，漏写会导致条目在筛选时消失或计数错误。
+- 增加或删除条目后，必须同步更新脚本中的 `totals`、筛选条总数与各 section 的 `data-count` / `data-nav-count`。
+- 网页项目链接到 `https://illagercpr.github.io/<name>/`，开源与分支项目链接到 `https://github.com/illagerCPR/<name>`，不要混用前缀。
 - 网页项目条目默认带 `.tags`；例外：`10492` 不写标签（保持仅有标题 + 描述）。
-- 新增语言时，必须同时添加对应的 `.fchip[data-filter]` 按钮与条目的 `data-stack`，并同步更新 `totals` 计数。
+- 新增语言时，必须同时添加对应的 `.fchip[data-filter]` 按钮与条目的 `data-stack`。
 - 占位行使用 `.soon-item`，不可点击；新项目上线时替换它，并始终保留 1 个。
 - 头像使用固定 GitHub 头像 URL（`https://avatars.githubusercontent.com/u/63698328?v=4&s=192`），随 GitHub 头像自动更新，勿替换为本地文件。加载失败时脚本回退为 `iC` 字形，不要删除该逻辑。
 - favicon 使用根目录 `favicon.ico`（多尺寸 16–256px，`<link rel="icon">` 引用），勿改回内联 data URI。
 - 首屏元素用 `.anim` + `style="--i:n"` 做 60ms 递增的进入动画；`prefers-reduced-motion` 下会自动关闭。
+
+## 许可协议标注
+
+- 只在仓库**确有许可协议**时显示徽标 `.lic`，没有协议的项目不显示。
+- 数据源：`gh api repos/illagerCPR/<repo> --jq '.license'`。若返回 `NOASSERTION`，必须读取 LICENSE 原文确认（`the-truth` 与 `creative-container` 实为 LGPL-3.0）。
+- 徽标放在 `<h3>` 标题后，可见文本用 SPDX 标识（如 `MIT`、`Unlicense`、`LGPL-3.0`），`title` 写完整名称，前面加 `.sr-only` 的「许可协议：」。
+- 新增或替换项目时，若上游许可变化，同步更新徽标。
 
 ## 主题与样式
 
