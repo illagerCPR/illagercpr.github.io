@@ -9,8 +9,8 @@
 <meta name="msvalidate.01" content="7CC5F80953B78F78F664A58A171CC826">
 <link rel="canonical" href="https://illagercpr.github.io/">
 <link rel="icon" href="favicon.ico">
-<meta name="theme-color" content="#f3f0e9" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#100f0e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f9fafc" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111823" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
 <meta property="og:title" content="illagerCPR · 个人主页">
 <meta property="og:description" content="illagerCPR 的个人主页：网页项目与开源项目集合。">
@@ -34,298 +34,246 @@
 </script>
 <style>
   :root {
-    --paper: #f3f0e9;
-    --ink: #17140f;
-    --muted: #6f685c;
-    --rule: rgba(23, 20, 15, .13);
-    --rule-strong: rgba(23, 20, 15, .34);
-    --accent: #c0432a;
-    --accent-soft: rgba(192, 67, 42, .09);
-    --chip: rgba(23, 20, 15, .045);
-    --hl: rgba(192, 67, 42, .055);
-    --mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    color-scheme: light;
+    --paper: #f9fafc;
+    --surface: #ffffff;
+    --ink: #182333;
+    --muted: #606d80;
+    --rule: #dce2eb;
+    --rule-strong: #bac5d5;
+    --accent: #295ae8;
+    --accent-soft: #edf2ff;
+    --chip: #f0f3f8;
+    --hl: #f1f5ff;
+    --preview: #e7eefd;
+    --preview-paper: #ffffff;
+    --preview-line: #b0c4f3;
+    --preview-ink: #4568ac;
+    --preview-hill: #c6d5f4;
+    --flight-bg: #15294b;
+    --flight-line: #4873a8;
+    --flight-orbit: #b5d1ff;
+    --flight-ink: #e1edff;
+    --js: #886311;
+    --rust: #a54a2d;
+    --py: #316e99;
+    --java: #965437;
+    --node: #42713b;
+    --shadow: 0 12px 32px rgb(25 48 92 / .06);
+    --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
     --ease: cubic-bezier(.2, .7, .2, 1);
   }
   html[data-theme="dark"] {
-    --paper: #100f0e;
-    --ink: #f2ede4;
-    --muted: #8f887b;
-    --rule: rgba(242, 237, 228, .14);
-    --rule-strong: rgba(242, 237, 228, .38);
-    --accent: #f4693f;
-    --accent-soft: rgba(244, 105, 63, .12);
-    --chip: rgba(242, 237, 228, .06);
-    --hl: rgba(244, 105, 63, .07);
+    color-scheme: dark;
+    --paper: #111823;
+    --surface: #182231;
+    --ink: #edf2fa;
+    --muted: #a3b0c3;
+    --rule: #2c3a4e;
+    --rule-strong: #4a5b74;
+    --accent: #91afff;
+    --accent-soft: #202f4c;
+    --chip: #202c3e;
+    --hl: #1d2a40;
+    --preview: #233450;
+    --preview-paper: #304668;
+    --preview-line: #597aac;
+    --preview-ink: #c0d3fb;
+    --preview-hill: #3c5981;
+    --flight-bg: #14253d;
+    --flight-line: #4972a3;
+    --flight-orbit: #b5d1ff;
+    --flight-ink: #e1edff;
+    --js: #d9bd73;
+    --rust: #e9a184;
+    --py: #87bbdf;
+    --java: #dfa581;
+    --node: #9bc78e;
+    --shadow: 0 12px 32px rgb(0 0 0 / .12);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-size: 16px;
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
+    background: var(--paper); color: var(--ink); font-family: var(--sans);
+    font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
   ::selection { background: var(--accent); color: var(--paper); }
   a { color: inherit; text-decoration: none; }
+  button { font: inherit; }
   [hidden] { display: none !important; }
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-radius: 3px; }
   code, .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
-
-  .progress {
-    position: fixed; inset: 0 0 auto 0; height: 2px;
-    z-index: 50; pointer-events: none;
-  }
-  .progress i {
-    display: block; height: 100%; width: 100%;
-    background: var(--accent);
-    transform: scaleX(0); transform-origin: 0 50%;
-  }
-  .skip {
-    position: fixed; top: 10px; left: 10px; z-index: 60;
-    padding: 8px 14px; background: var(--ink); color: var(--paper);
-    font-size: 13px; transform: translateY(-160%);
-  }
-  .skip:focus { transform: none; }
-
-  .shell {
-    max-width: 1280px; margin: 0 auto;
-    padding: 0 clamp(20px, 3.5vw, 56px);
-    display: grid;
-    grid-template-columns: minmax(240px, 310px) minmax(0, 1fr);
-    gap: clamp(32px, 4.5vw, 72px);
-    align-items: start;
-  }
-
-  .rail {
-    position: sticky; top: 0;
-    height: 100vh; height: 100svh;
-    display: flex; flex-direction: column;
-    padding: clamp(28px, 4vh, 52px) clamp(18px, 2vw, 30px) clamp(22px, 3vh, 36px) 0;
-    border-right: 1px solid var(--rule);
-  }
-  .eyebrow, .kicker, .stamp, .meta-count, .flabel, .fcount {
-    font-family: var(--mono); font-size: 11px;
-    letter-spacing: .16em; text-transform: uppercase; color: var(--muted);
-  }
-  .eyebrow { display: flex; justify-content: space-between; }
-  .avatar {
-    width: 52px; height: 52px; border-radius: 50%;
-    object-fit: cover; display: block; margin: 26px 0 18px;
-    border: 1px solid var(--rule-strong);
-  }
-  .rail h1 {
-    font-size: clamp(30px, 3.4vw, 42px);
-    line-height: 1.02; letter-spacing: -.035em; font-weight: 650;
-  }
-  .cn { margin-top: 8px; font-size: 13px; letter-spacing: .52em; color: var(--muted); }
-  .lede { margin-top: 22px; font-size: 13.5px; line-height: 1.85; color: var(--muted); }
-  .lede b { color: var(--ink); font-weight: 550; }
-
-  .rail-body { margin-top: 30px; }
-  .rail-nav { padding-top: 4px; }
-  .rail-nav a {
-    display: grid; grid-template-columns: 26px 1fr auto;
-    align-items: baseline; gap: 10px;
-    padding: 11px 0; border-top: 1px solid var(--rule);
-    font-size: 14px; transition: color .2s var(--ease), opacity .2s var(--ease);
-  }
-  .rail-nav a:last-child { border-bottom: 1px solid var(--rule); }
-  .rail-nav .n { font-family: var(--mono); font-size: 10.5px; color: var(--muted); }
-  .rail-nav .c { font-family: var(--mono); font-size: 10.5px; color: var(--muted); }
-  .rail-nav a:hover { color: var(--accent); }
-  .rail-nav a:hover .n, .rail-nav a:hover .c { color: var(--accent); }
-  .rail-nav a[aria-disabled="true"] { opacity: .35; pointer-events: none; }
-
-  .rail-links { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 22px; }
-  .rail-links a {
-    display: inline-flex; gap: 6px; align-items: center;
-    font-size: 13px; border-bottom: 1px solid var(--rule-strong); padding-bottom: 2px;
-    transition: color .2s var(--ease), border-color .2s var(--ease);
-  }
-  .rail-links a:hover { color: var(--accent); border-color: var(--accent); }
-  .rail-links .arr { font-size: 11px; color: var(--muted); }
-
-  .rail-foot { margin-top: auto; padding-top: 26px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-  .stamp { line-height: 1.5; }
-  .theme {
-    flex: none; display: inline-flex; align-items: center; gap: 7px;
-    padding: 6px 11px; border: 1px solid var(--rule);
-    background: transparent; color: var(--ink);
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em;
-    cursor: pointer; border-radius: 999px;
-    transition: border-color .2s var(--ease), color .2s var(--ease);
-  }
-  .theme:hover { border-color: var(--accent); color: var(--accent); }
-  .theme .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
-
-  main { min-width: 0; padding: clamp(20px, 3vh, 32px) 0 0; }
-
-  .filters {
-    position: sticky; top: 0; z-index: 20;
-    display: flex; align-items: center; gap: 14px;
-    padding: 14px 0;
-    margin-bottom: 22px;
-    background: var(--paper);
-    border-bottom: 1px solid var(--rule);
-  }
-  .flabel { flex: none; font-size: 10px; letter-spacing: .18em; }
-  .fscroll {
-    display: flex; flex: 1 1 auto; gap: 6px; min-width: 0;
-    overflow-x: auto; scrollbar-width: none;
-  }
-  .fscroll::-webkit-scrollbar { display: none; }
-  .fchip {
-    flex: none; padding: 4px 10px;
-    border: 1px solid var(--rule); border-radius: 3px;
-    background: none; color: var(--muted); cursor: pointer;
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em;
-    transition: color .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease);
-  }
-  .fchip:hover { color: var(--ink); border-color: var(--rule-strong); }
-  .fchip[aria-pressed="true"] { color: var(--paper); background: var(--ink); border-color: var(--ink); }
-  .fcount { margin-left: auto; flex: none; font-size: 10px; }
-  .fcount b { color: var(--ink); font-weight: 500; }
-
-  .sect { padding-bottom: clamp(52px, 7vh, 84px); scroll-margin-top: 64px; }
-  .sec-head { padding-bottom: 0; margin-bottom: 34px; }
-  .kicker { display: flex; align-items: center; gap: 10px; }
-  .kicker .idx { color: var(--accent); }
-  .kicker .meta-count { margin-left: auto; }
-  .sec-head h2 { margin-top: 12px; font-size: clamp(26px, 3vw, 34px); line-height: 1.15; letter-spacing: -.02em; font-weight: 620; }
-  .sec-head .sub { margin-top: 7px; font-size: 13.5px; color: var(--muted); }
-
-  .plates { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(24px, 3vw, 44px); }
-  .plate {
-    display: flex; flex-direction: column;
-    padding: 22px 0 26px; border-top: 1px solid var(--rule);
-    transition: border-color .25s var(--ease);
-  }
-  .plate:hover { border-color: var(--accent); }
-  .plate-top { display: flex; align-items: center; justify-content: space-between; font-family: var(--mono); font-size: 11px; color: var(--muted); }
-  .live { display: inline-flex; align-items: center; gap: 6px; letter-spacing: .14em; color: var(--accent); }
-  .live i { width: 5px; height: 5px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 3px var(--accent-soft); }
-  .plate h3 {
-    margin-top: 18px; font-size: clamp(22px, 2.4vw, 27px);
-    font-weight: 600; letter-spacing: -.02em; line-height: 1.2;
-    display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px;
-    transition: color .2s var(--ease);
-  }
-  .plate:hover h3 { color: var(--accent); }
-  .plate .desc { margin-top: 10px; font-size: 13.5px; line-height: 1.8; color: var(--muted); max-width: 34em; }
-  .plate .tags { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px; }
-  .plate-foot {
-    margin-top: auto; padding-top: 22px;
-    display: flex; align-items: center; justify-content: space-between; gap: 12px;
-    font-size: 11.5px; color: var(--muted);
-  }
-  .plate-foot code { font-size: 11px; }
-  .go { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; color: var(--ink); }
-  .go .arrow { transition: transform .25s var(--ease); }
-  .plate:hover .go { color: var(--accent); }
-  .plate:hover .go .arrow { transform: translate(3px, -3px); }
-
-  .tag {
-    font-size: 11px; letter-spacing: .02em; color: var(--muted);
-    background: var(--chip); border: 1px solid var(--rule);
-    padding: 2px 8px; border-radius: 3px;
-  }
-  .lic {
-    flex: none;
-    font-family: var(--mono); font-size: 9.5px; letter-spacing: .06em;
-    color: var(--muted); border: 1px solid var(--rule); border-radius: 3px;
-    padding: 1px 6px; line-height: 1.6; white-space: nowrap;
-  }
   .sr-only {
     position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
     overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
   }
-
-  .rows { list-style: none; margin-top: 8px; }
+  .progress { position: fixed; inset: 0 0 auto; height: 2px; z-index: 50; pointer-events: none; }
+  .progress i { display: block; height: 100%; background: var(--accent); transform: scaleX(0); transform-origin: 0 50%; }
+  .skip {
+    position: fixed; top: 10px; left: 10px; z-index: 60; padding: 8px 14px;
+    background: var(--ink); color: var(--paper); font-size: 13px; transform: translateY(-160%);
+  }
+  .skip:focus { transform: none; }
+  .shell { max-width: 1280px; margin: auto; padding: 0 clamp(20px, 5vw, 64px); }
+  .topbar { min-height: 88px; display: flex; align-items: center; gap: 28px; border-bottom: 1px solid var(--rule); }
+  .brand { display: inline-flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 650; letter-spacing: -.02em; }
+  .brand-mark {
+    display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid var(--rule-strong);
+    border-radius: 9px; color: var(--accent); font-family: var(--mono); font-size: 14px; font-weight: 600;
+  }
+  .main-nav { margin-left: auto; display: flex; gap: clamp(18px, 2.5vw, 36px); }
+  .main-nav a { display: inline-flex; align-items: baseline; gap: 7px; padding: 10px 0; font-size: 13px; color: var(--muted); }
+  .main-nav .c { font-family: var(--mono); font-size: 10px; color: var(--accent); }
+  .main-nav a:hover, .brand:hover { color: var(--accent); }
+  .main-nav a[aria-disabled="true"] { opacity: .4; pointer-events: none; }
+  .theme {
+    flex: none; display: inline-flex; align-items: center; gap: 8px; min-height: 38px;
+    padding: 7px 12px; border: 1px solid var(--rule); border-radius: 999px;
+    background: var(--surface); color: var(--ink); font-size: 12px; cursor: pointer;
+  }
+  .theme:hover { border-color: var(--accent); }
+  .theme .dot { width: 11px; height: 11px; border: 1.5px solid var(--accent); border-radius: 50%; background: linear-gradient(90deg, var(--accent) 50%, var(--surface) 50%); }
+  main { min-width: 0; }
+  .intro { display: grid; grid-template-columns: 1.2fr 1fr; gap: 50px; align-items: center; padding: 62px 0 58px; }
+  .eyebrow, .kicker, .meta-count, .flabel, .fcount { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; color: var(--muted); }
+  .eyebrow { display: flex; align-items: center; gap: 10px; color: var(--accent); margin-bottom: 20px; }
+  .eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--accent); }
+  .identity { display: flex; align-items: center; gap: 20px; }
+  .avatar { display: block; width: 76px; height: 76px; flex: none; border: 1px solid var(--rule); border-radius: 50%; object-fit: cover; }
+  h1 { font-size: clamp(40px, 4.7vw, 62px); line-height: 1.1; letter-spacing: -.055em; font-weight: 650; }
+  .cn { margin-top: 9px; font-size: 13px; letter-spacing: .34em; color: var(--muted); }
+  .intro-title { margin-top: 24px; font-size: clamp(19px, 2.1vw, 26px); font-weight: 500; letter-spacing: -.025em; }
+  .lede { max-width: 34em; font-size: 14px; line-height: 1.95; color: var(--muted); }
+  .lede b { font-weight: 500; color: var(--ink); }
+  .intro-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+  .intro-links a { display: inline-flex; align-items: center; gap: 20px; border: 1px solid var(--rule-strong); border-radius: 6px; padding: 8px 16px; font-size: 13px; background: var(--surface); }
+  .intro-links a:first-child { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .intro-links a:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+  .filters {
+    position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 16px;
+    min-height: 70px; padding: 14px 0; margin-bottom: 42px; background: var(--paper);
+    border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  }
+  .flabel { flex: none; font-size: 10px; }
+  .fscroll { display: flex; flex: 1 1 auto; gap: 5px; min-width: 0; overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--rule-strong) var(--paper); padding: 4px; }
+  .fchip { flex: none; padding: 6px 11px; min-height: 34px; border: 1px solid transparent; border-radius: 5px; background: none; color: var(--muted); cursor: pointer; font-size: 12px; transition: background .2s var(--ease), color .2s var(--ease); }
+  .fchip:hover { color: var(--accent); background: var(--accent-soft); }
+  .fchip[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); border-color: var(--rule); }
+  .fcount { margin-left: auto; flex: none; font-size: 11px; letter-spacing: 0; }
+  .fcount b { color: var(--ink); font-weight: 500; }
+  .sect { padding-bottom: 74px; scroll-margin-top: 92px; }
+  .sec-head { position: relative; margin-bottom: 26px; }
+  .kicker { display: flex; align-items: center; gap: 10px; font-size: 10px; }
+  .kicker .idx { color: var(--accent); }
+  .kicker .meta-count { margin-left: auto; color: var(--accent); font-size: 12px; }
+  .sec-head h2 { margin-top: 8px; font-size: 28px; line-height: 1.3; font-weight: 600; letter-spacing: -.04em; }
+  .sec-head .sub { margin-top: 7px; font-size: 13px; color: var(--muted); }
+  .plates { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; margin-bottom: 26px; }
+  .plate { min-width: 0; display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; transition: border-color .25s var(--ease), box-shadow .25s var(--ease); }
+  .plate:hover { border-color: var(--rule-strong); box-shadow: var(--shadow); }
+  .preview { position: relative; aspect-ratio: 2.25; overflow: hidden; background: var(--preview); border-bottom: 1px solid var(--rule); }
+  .preview svg { display: block; width: 100%; height: 100%; transition: transform .5s var(--ease); }
+  .plate:hover .preview svg { transform: scale(1.025); }
+  .preview.flight { background: var(--flight-bg); }
+  .preview-paper { fill: var(--preview-paper); }
+  .preview-line { fill: none; stroke: var(--preview-line); }
+  .preview-ink { fill: var(--preview-ink); }
+  .preview-hill { fill: var(--preview-hill); }
+  .flight-grid { fill: none; stroke: var(--flight-line); stroke-width: 1; }
+  .flight-route { fill: none; stroke: var(--flight-orbit); stroke-width: 1.5; }
+  .flight-label { fill: var(--flight-ink); }
+  .plate-body { display: flex; flex-direction: column; flex: 1; padding: 22px 26px 24px; }
+  .plate-top { display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 10px; letter-spacing: .1em; color: var(--muted); }
+  .live { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); }
+  .live i { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+  .plate h3 { margin-top: 12px; font-size: clamp(20px, 2.3vw, 26px); line-height: 1.3; font-weight: 600; letter-spacing: -.035em; display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; overflow-wrap: anywhere; }
+  .plate:hover h3, .row:hover h3 { color: var(--accent); }
+  .plate .desc { margin-top: 11px; font-size: 13px; line-height: 1.85; color: var(--muted); }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .plate .tags { margin-top: 16px; }
+  .tag { font-size: 10px; color: var(--muted); background: var(--chip); padding: 3px 8px; border-radius: 4px; }
+  .lic { flex: none; font-family: var(--mono); font-size: 9px; font-weight: 400; letter-spacing: 0; color: var(--muted); border: 1px solid var(--rule); border-radius: 4px; padding: 1px 6px; line-height: 1.7; white-space: nowrap; }
+  .plate-foot { margin-top: auto; padding-top: 24px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+  .plate-foot code { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 10px; color: var(--muted); }
+  .go { flex: none; display: inline-flex; align-items: center; gap: 8px; color: var(--accent); font-size: 12px; }
+  .arrow { display: inline-block; transition: transform .2s var(--ease); }
+  .plate:hover .go .arrow, .row:hover .row-meta > .arrow { transform: translate(2px, -2px); }
+  .rows { list-style: none; }
   .row-item { border-top: 1px solid var(--rule); }
-  .rows .row-item:first-child { border-top: 1px solid var(--rule-strong); }
-  .row {
-    display: grid; grid-template-columns: 42px minmax(0, 1fr) auto;
-    align-items: start; gap: 0 14px;
-    padding: 24px 0;
-    transition: background .2s var(--ease);
-  }
+  .row-item:last-child { border-bottom: 1px solid var(--rule); }
+  .row { display: grid; grid-template-columns: 32px minmax(0, 1fr) 124px; gap: 16px; align-items: start; padding: 25px 12px; border-radius: 5px; transition: background .2s var(--ease); }
   .row:hover { background: var(--hl); }
-  .row .no { font-family: var(--mono); font-size: 11px; color: var(--muted); padding-top: 6px; }
-  .row h3 {
-    font-size: 16.5px; font-weight: 600; letter-spacing: -.01em;
-    display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px;
-    transition: color .2s var(--ease);
-  }
-  .row:hover h3 { color: var(--accent); }
-  .row .desc { margin-top: 6px; font-size: 13.5px; line-height: 1.8; color: var(--muted); max-width: 62ch; }
-  .row .tags { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
-  .row-meta { padding-top: 4px; text-align: right; display: flex; align-items: center; gap: 12px; }
-  .lang { display: inline-flex; align-items: center; gap: 7px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; color: var(--muted); white-space: nowrap; }
-  .lang i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-  .js { color: #a9852c; } .rust { color: #b4623c; } .py { color: #4a7a9b; }
-  .java { color: #95603f; } .node { color: #5f8d4e; }
-  .arrow { font-size: 12px; color: var(--muted); transition: transform .25s var(--ease), color .25s var(--ease); }
-  .row:hover .arrow { transform: translateX(4px); color: var(--accent); }
-
-  .row.feature { padding-top: 30px; padding-bottom: 30px; }
-  .row.feature h3 { font-size: clamp(19px, 2vw, 23px); letter-spacing: -.02em; }
-  .row.feature .desc { font-size: 14px; }
-
+  .row .no { font-family: var(--mono); font-size: 10px; color: var(--muted); padding-top: 5px; }
+  .row h3 { display: flex; align-items: center; flex-wrap: wrap; gap: 5px 9px; font-size: 17px; font-weight: 600; letter-spacing: -.02em; overflow-wrap: anywhere; }
+  .row .desc { margin-top: 7px; max-width: 78ch; font-size: 13px; line-height: 1.85; color: var(--muted); overflow-wrap: anywhere; }
+  .row .tags { margin-top: 12px; }
+  .row-meta { display: flex; align-items: center; justify-content: flex-end; gap: 16px; padding-top: 5px; }
+  .row-meta > .arrow { color: var(--muted); font-size: 14px; }
+  .lang { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 10px; color: var(--muted); white-space: nowrap; }
+  .lang i { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+  .js { color: var(--js); } .rust { color: var(--rust); } .py { color: var(--py); } .java { color: var(--java); } .node { color: var(--node); }
+  .row.feature { margin: 14px 0; padding: 28px 24px; background: var(--accent-soft); border: 1px solid var(--rule); border-radius: 8px; }
+  .row.feature:hover { border-color: var(--accent); }
+  .row.feature h3 { font-size: 24px; }
+  .row.feature .desc { font-size: 13px; }
   .row.soon { cursor: default; }
   .row.soon:hover { background: none; }
-  .row.soon h3 { color: var(--muted); font-weight: 500; }
-  .row.soon:hover h3 { color: var(--muted); }
-  .row.soon .desc { color: var(--muted); opacity: .8; }
-  .soon-badge { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; color: var(--muted); border: 1px dashed var(--rule-strong); padding: 2px 8px; border-radius: 999px; }
-
-  footer {
-    border-top: 1px solid var(--rule-strong);
-    padding: 26px 0 44px;
-    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px;
-    font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--muted);
+  .row.soon h3 { color: var(--muted); font-weight: 400; font-size: 14px; }
+  .soon-badge { font-size: 10px; color: var(--muted); border: 1px dashed var(--rule-strong); padding: 1px 8px; border-radius: 999px; }
+  footer { border-top: 1px solid var(--rule-strong); padding: 26px 0 38px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 24px; font-size: 11px; color: var(--muted); }
+  footer .links { display: flex; gap: 20px; }
+  footer a:hover { color: var(--accent); }
+  @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  .anim { animation: rise .65s var(--ease) both; animation-delay: calc(var(--i, 0) * 60ms); }
+  @media (max-width: 960px) {
+    .topbar { gap: 20px; }
+    .main-nav { gap: 18px; }
+    .intro { gap: 30px; padding: 46px 0; }
+    .identity { gap: 14px; }
+    .avatar { width: 60px; height: 60px; }
+    .plate-body { padding: 20px; }
+    .row { grid-template-columns: 24px minmax(0, 1fr) 106px; gap: 12px; }
   }
-  footer a { border-bottom: 1px solid transparent; }
-  footer a:hover { color: var(--accent); border-color: var(--accent); }
-  footer .links { display: flex; gap: 18px; }
-
-  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-  .anim { animation: rise .7s var(--ease) both; animation-delay: calc(var(--i, 0) * 60ms); }
-
-  @media (max-width: 900px) {
-    .shell { grid-template-columns: 1fr; gap: 0; }
-    .rail {
-      position: static; height: auto; border-right: 0;
-      border-bottom: 1px solid var(--rule-strong);
-      padding: 36px 0 30px;
-    }
-    .rail h1 { font-size: 34px; }
-    .lede { max-width: 46ch; }
-    .rail-body { margin-top: 26px; }
-    .rail-nav a { padding: 10px 0; }
-    .rail-foot { margin-top: 20px; padding-top: 0; }
-    main { padding-top: 20px; }
-    .filters { padding: 12px 0; margin-bottom: 26px; }
-    .plates { grid-template-columns: 1fr; }
-    .plate { padding-bottom: 22px; }
-    .plate-foot { padding-top: 16px; }
-  }
-  @media (max-width: 620px) {
+  @media (max-width: 700px) {
+    .topbar { flex-wrap: wrap; gap: 0 16px; padding-top: 16px; }
+    .brand { min-height: 38px; }
+    .theme { margin-left: auto; }
+    .main-nav { order: 3; width: 100%; margin: 6px 0 0; justify-content: space-between; gap: 12px; }
+    .main-nav a { min-height: 44px; }
+    .intro { grid-template-columns: 1fr; gap: 24px; padding: 36px 0; }
+    h1 { font-size: clamp(36px, 8vw, 52px); }
+    .eyebrow { margin-bottom: 18px; font-size: 10px; }
+    .intro-title { margin-top: 20px; font-size: 22px; }
+    .lede { font-size: 13px; max-width: 40em; }
+    .intro-links { margin-top: 18px; }
+    .filters { min-height: 64px; gap: 10px; margin-bottom: 30px; }
     .flabel { display: none; }
+    .fchip { min-height: 38px; padding: 7px 11px; }
     .fcount { font-size: 10px; }
-    .row { grid-template-columns: 30px minmax(0, 1fr); padding: 20px 0; }
-    .row-meta { grid-column: 2; padding-top: 10px; justify-content: flex-start; }
-    .row .no { padding-top: 4px; }
-    .row .desc { font-size: 13px; }
-    .sec-head { margin-bottom: 24px; }
-    footer { flex-direction: column; }
+    .plates { grid-template-columns: 1fr; gap: 20px; }
+    .preview { aspect-ratio: 2.1; }
+    .plate h3 { font-size: 24px; }
+    .plate-body { padding: 22px; }
+    .sect { padding-bottom: 54px; scroll-margin-top: 82px; }
+    .sec-head h2 { font-size: 25px; }
+    .row { grid-template-columns: 22px minmax(0, 1fr); gap: 0 10px; padding: 22px 0; }
+    .row-meta { grid-column: 2; justify-content: flex-start; gap: 14px; padding-top: 13px; }
+    .row.feature { padding: 22px 16px; }
+    .row.feature h3 { font-size: 22px; }
+    .row.soon .row-meta { display: none; }
+    footer { flex-direction: column; padding-bottom: 30px; }
+  }
+  @media (max-width: 360px) {
+    .identity { gap: 12px; }
+    .avatar { width: 48px; height: 48px; }
+    h1 { font-size: 34px; }
+    .plate-body { padding: 18px; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
   }
 </style>
 </head>
@@ -334,34 +282,34 @@
 <a class="skip" href="#main">跳到主要内容</a>
 
 <div class="shell">
-  <aside class="rail">
-    <div>
-      <p class="eyebrow"><span>00</span><span>INDEX</span></p>
-      <img class="avatar" src="https://avatars.githubusercontent.com/u/63698328?v=4&amp;s=192" width="52" height="52" alt="illagerCPR 头像">
-      <h1>illagerCPR</h1>
-      <p class="cn">无名之迹</p>
-      <p class="lede">程序开发 · Web 工具 · 趣味实验。<br>这里的网页项目均为<b>纯前端实现</b>，无需后端与联网，数据不离开你的浏览器。</p>
-    </div>
-
-    <div class="rail-body">
-      <nav class="rail-nav" aria-label="页面导航">
-        <a href="#web"><span class="n">01</span><span>网页项目</span><span class="c" data-nav-count="web">04</span></a>
-        <a href="#oss"><span class="n">02</span><span>开源项目</span><span class="c" data-nav-count="oss">10</span></a>
-        <a href="#fork"><span class="n">03</span><span>分支项目</span><span class="c" data-nav-count="fork">01</span></a>
-      </nav>
-      <div class="rail-links">
-        <a href="https://github.com/illagerCPR" target="_blank" rel="me noopener">GitHub <span class="arr" aria-hidden="true">↗</span></a>
-        <a href="https://illagercpr.github.io/blog/" target="_blank" rel="noopener">博客 BLOG <span class="arr" aria-hidden="true">↗</span></a>
-      </div>
-    </div>
-
-    <div class="rail-foot">
-      <p class="stamp">纯静态 · 0 依赖<br>GitHub Pages</p>
-      <button class="theme" id="theme" type="button" aria-pressed="false"><span class="dot" aria-hidden="true"></span><span id="theme-label">深色</span></button>
-    </div>
-  </aside>
+  <header class="topbar anim" style="--i:0">
+    <a class="brand" href="#main" aria-label="illagerCPR 首页"><span class="brand-mark" aria-hidden="true">iC</span>illagerCPR</a>
+    <nav class="main-nav" aria-label="页面导航">
+      <a href="#web"><span>网页项目</span><span class="c" data-nav-count="web">04</span></a>
+      <a href="#oss"><span>开源项目</span><span class="c" data-nav-count="oss">10</span></a>
+      <a href="#fork"><span>分支项目</span><span class="c" data-nav-count="fork">01</span></a>
+    </nav>
+    <button class="theme" id="theme" type="button" aria-pressed="false"><span class="dot" aria-hidden="true"></span><span id="theme-label">深色</span><span class="sr-only">主题</span></button>
+  </header>
 
   <main id="main">
+    <div class="intro">
+      <div class="anim" style="--i:1">
+        <p class="eyebrow">CODE · TOOLS · EXPERIMENTS</p>
+        <div class="identity">
+          <img class="avatar" src="https://avatars.githubusercontent.com/u/63698328?v=4&amp;s=192" width="76" height="76" alt="illagerCPR 头像">
+          <div><h1>illagerCPR</h1><p class="cn">无名之迹</p></div>
+        </div>
+        <p class="intro-title">把想法写成可以使用的作品。</p>
+      </div>
+      <div class="intro-about anim" style="--i:2">
+        <p class="lede">程序开发 · Web 工具 · 趣味实验。<br>从浏览器里的小工具，到游戏与开源项目，<br>这里收录了我的一些作品与探索。</p>
+        <div class="intro-links">
+          <a href="https://github.com/illagerCPR" target="_blank" rel="me noopener">GitHub <span aria-hidden="true">↗</span></a>
+          <a href="https://illagercpr.github.io/blog/" target="_blank" rel="noopener">博客 <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
     <div class="filters" role="group" aria-label="筛选项目">
       <span class="flabel">FILTER</span>
       <div class="fscroll">
@@ -379,38 +327,83 @@
     </div>
 
     <section class="sect" id="web" data-section="web" aria-labelledby="web-title">
-      <header class="sec-head anim" style="--i:0">
+      <header class="sec-head anim" style="--i:3">
         <p class="kicker"><span class="idx">01</span><span class="lbl">/ WEB PROJECTS</span><span class="meta-count" data-count="web">04</span></p>
         <h2 id="web-title">网页项目</h2>
         <p class="sub">打开即用的纯前端应用，全部在浏览器本地运行。</p>
       </header>
 
       <div class="plates">
-        <a class="plate entry anim" data-kind="web" data-stack="js" style="--i:1" href="https://illagercpr.github.io/watermark/" target="_blank" rel="noopener">
-          <div class="plate-top"><span>01</span><span class="live"><i aria-hidden="true"></i>LIVE</span></div>
-          <h3>watermark <span class="lic" title="The Unlicense"><span class="sr-only">许可协议：</span>Unlicense</span></h3>
-          <p class="desc">纯前端图片水印工具：多行文本平铺、DFT 频域盲水印（无需原图提取）、批量处理。零依赖，图片不会离开浏览器。</p>
-          <div class="tags"><span class="tag">图片工具</span><span class="tag">本地处理</span></div>
-          <div class="plate-foot">
-            <code>illagercpr.github.io/watermark</code>
-            <span class="go">打开 <span class="arrow" aria-hidden="true">↗</span></span>
+        <a class="plate entry anim" data-kind="web" data-stack="js" style="--i:4" href="https://illagercpr.github.io/watermark/" target="_blank" rel="noopener">
+          <div class="preview" aria-hidden="true">
+            <svg viewBox="0 0 560 248" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs><clipPath id="wm-frame"><rect x="120" y="37" width="320" height="180" rx="7"/></clipPath></defs>
+              <path class="preview-line" d="M28 48H82M55 21V75M478 200H532M505 173V227"/>
+              <rect class="preview-line" x="104" y="24" width="320" height="180" rx="7"/>
+              <rect class="preview-paper" x="120" y="37" width="320" height="180" rx="7"/>
+              <g clip-path="url(#wm-frame)">
+                <circle class="preview-hill" cx="357" cy="87" r="21"/>
+                <path class="preview-hill" d="M120 198L225 103L310 176L350 139L440 217H120Z"/>
+                <g class="preview-ink" opacity=".5" transform="rotate(-24 280 124)" font-family="ui-monospace, monospace" font-size="13" letter-spacing="3">
+                  <text x="57" y="64">WATERMARK  WATERMARK  WATERMARK</text>
+                  <text x="57" y="108">WATERMARK  WATERMARK  WATERMARK</text>
+                  <text x="57" y="152">WATERMARK  WATERMARK  WATERMARK</text>
+                  <text x="57" y="196">WATERMARK  WATERMARK  WATERMARK</text>
+                </g>
+              </g>
+              <rect class="preview-line" x="120" y="37" width="320" height="180" rx="7"/>
+              <text class="preview-ink" x="22" y="230" font-family="ui-monospace, monospace" font-size="9" letter-spacing="2">IMAGE / LOCAL</text>
+              <text class="preview-ink" x="468" y="28" font-family="ui-monospace, monospace" font-size="9" letter-spacing="2">01 / WM</text>
+            </svg>
+          </div>
+          <div class="plate-body">
+            <div class="plate-top"><span>01</span><span class="live"><i aria-hidden="true"></i>LIVE</span></div>
+            <h3>watermark <span class="lic" title="The Unlicense"><span class="sr-only">许可协议：</span>Unlicense</span></h3>
+            <p class="desc">纯前端图片水印工具：多行文本平铺、DFT 频域盲水印（无需原图提取）、批量处理。零依赖，图片不会离开浏览器。</p>
+            <div class="tags"><span class="tag">图片工具</span><span class="tag">本地处理</span></div>
+            <div class="plate-foot">
+              <code>illagercpr.github.io/watermark</code>
+              <span class="go">打开 <span class="arrow" aria-hidden="true">↗</span></span>
+            </div>
           </div>
         </a>
 
-        <a class="plate entry anim" data-kind="web" data-stack="js" style="--i:2" href="https://illagercpr.github.io/earth-airline-test/" target="_blank" rel="noopener">
-          <div class="plate-top"><span>02</span><span class="live"><i aria-hidden="true"></i>LIVE</span></div>
-          <h3>earth-airline-test</h3>
-          <p class="desc">一个 HTML 文件完成的 3D 航班可视化：Three.js 可旋转地球、平滑模拟实时航迹，手机与桌面自适应。</p>
-          <div class="tags"><span class="tag">3D 可视化</span><span class="tag">Three.js</span></div>
-          <div class="plate-foot">
-            <code>illagercpr.github.io/earth-airline-test</code>
-            <span class="go">打开 <span class="arrow" aria-hidden="true">↗</span></span>
+        <a class="plate entry anim" data-kind="web" data-stack="js" style="--i:5" href="https://illagercpr.github.io/earth-airline-test/" target="_blank" rel="noopener">
+          <div class="preview flight" aria-hidden="true">
+            <svg viewBox="0 0 560 248" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g class="flight-grid">
+                <path d="M28 124H532M280 16V232" stroke-dasharray="3 7"/>
+                <circle cx="280" cy="124" r="92"/>
+                <ellipse cx="280" cy="124" rx="40" ry="92"/>
+                <ellipse cx="280" cy="124" rx="73" ry="92"/>
+                <ellipse cx="280" cy="124" rx="92" ry="32"/>
+                <path d="M209 66Q280 101 351 66M209 182Q280 147 351 182"/>
+              </g>
+              <ellipse class="flight-route" cx="280" cy="124" rx="158" ry="52" transform="rotate(-23 280 124)" stroke-dasharray="4 6" opacity=".7"/>
+              <path class="flight-route" d="M164 161Q244 36 380 86"/>
+              <circle class="flight-label" cx="164" cy="161" r="3"/>
+              <circle class="flight-route" cx="164" cy="161" r="8" opacity=".6"/>
+              <path class="flight-label" d="M0-12L3-3L13 3V6L3 3L2 11H-2L-3 3L-13 6V3L-3-3Z" transform="translate(380 86) rotate(106)"/>
+              <text class="flight-label" x="22" y="28" font-family="ui-monospace, monospace" font-size="9" letter-spacing="2">EARTH / AIRLINE</text>
+              <text class="flight-label" x="22" y="230" font-family="ui-monospace, monospace" font-size="9" letter-spacing="2">FLIGHT PATHS</text>
+              <text class="flight-label" x="465" y="230" font-family="ui-monospace, monospace" font-size="9" letter-spacing="2">02 / 3D</text>
+            </svg>
+          </div>
+          <div class="plate-body">
+            <div class="plate-top"><span>02</span><span class="live"><i aria-hidden="true"></i>LIVE</span></div>
+            <h3>earth-airline-test</h3>
+            <p class="desc">一个 HTML 文件完成的 3D 航班可视化：Three.js 可旋转地球、平滑模拟实时航迹，手机与桌面自适应。</p>
+            <div class="tags"><span class="tag">3D 可视化</span><span class="tag">Three.js</span></div>
+            <div class="plate-foot">
+              <code>illagercpr.github.io/earth-airline-test</code>
+              <span class="go">打开 <span class="arrow" aria-hidden="true">↗</span></span>
+            </div>
           </div>
         </a>
       </div>
 
       <ul class="rows">
-        <li class="row-item entry anim" data-kind="web" data-stack="" style="--i:3">
+        <li class="row-item entry anim" data-kind="web" data-stack="" style="--i:6">
           <a class="row" href="https://illagercpr.github.io/10492/" target="_blank" rel="noopener">
             <span class="no">03</span>
             <div>
@@ -420,7 +413,7 @@
             <div class="row-meta"><span class="lang"><i aria-hidden="true" style="background: var(--accent)"></i>LIVE</span><span class="arrow" aria-hidden="true">→</span></div>
           </a>
         </li>
-        <li class="row-item entry anim" data-kind="web" data-stack="js" style="--i:4">
+        <li class="row-item entry anim" data-kind="web" data-stack="js" style="--i:7">
           <a class="row" href="https://illagercpr.github.io/earth-airline-rx/" target="_blank" rel="noopener">
             <span class="no">04</span>
             <div>
@@ -431,7 +424,7 @@
             <div class="row-meta"><span class="lang"><i aria-hidden="true" style="background: var(--accent)"></i>LIVE</span><span class="arrow" aria-hidden="true">→</span></div>
           </a>
         </li>
-        <li class="row-item soon-item anim" data-kind="web" data-stack="" style="--i:5">
+        <li class="row-item soon-item anim" data-kind="web" data-stack="" style="--i:8">
           <div class="row soon">
             <span class="no">--</span>
             <div>
@@ -629,8 +622,9 @@
     document.getElementById('year').textContent = new Date().getFullYear();
 
     var avatar = document.querySelector('.avatar');
+    var palette = getComputedStyle(root);
     var avatarFallback = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(
-      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><rect width="96" height="96" fill="#6f685c"/><text x="48" y="61" font-family="monospace" font-size="34" fill="#f3f0e9" text-anchor="middle">iC</text></svg>'
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><rect width="96" height="96" fill="' + palette.getPropertyValue('--accent').trim() + '"/><text x="48" y="61" font-family="monospace" font-size="34" fill="' + palette.getPropertyValue('--paper').trim() + '" text-anchor="middle">iC</text></svg>'
     );
     function useAvatarFallback() {
       if (avatar && avatar.src !== avatarFallback) avatar.src = avatarFallback;
@@ -694,6 +688,7 @@
       });
 
       shownEl.textContent = pad(total);
+      onScroll();
     }
 
     document.querySelectorAll('[data-filter]').forEach(function (btn) {
