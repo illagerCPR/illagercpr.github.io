@@ -5,7 +5,8 @@ illagerCPR 个人主页仓库（GitHub Pages）。单页纯静态站点，无构
 ## 仓库事实
 
 - 默认分支是 `master`（不是 main）。推送 `master` 即触发 GitHub Pages 自动构建部署，无需手动部署。
-- 唯一入口：根目录 `index.html`（零依赖，HTML + 内联 CSS/JS，中文界面 + 英文标签）。
+- 站点域名是 `https://www.illageraris.dpdns.org/`（`CNAME` 固定为此值）；`https://illagercpr.github.io/` 会 301 跳转到该域名，网页子项目与博客在新域名下同路径可访问（如 `/watermark/`、`/blog/`）。所有面向用户的地址一律写新域名。
+- 页面唯一入口：根目录 `index.html`（零依赖，HTML + 内联 CSS/JS，中文界面 + 英文标签）。根目录另有 `CNAME`、`.nojekyll`、`robots.txt`、`favicon.ico` 与 `.well-known/` 等静态文件。
 - 构建部署约需 1 分钟。验证上线：
 
   ```bash
@@ -17,6 +18,9 @@ illagerCPR 个人主页仓库（GitHub Pages）。单页纯静态站点，无构
 ## 不可改动的内容
 
 - `robots.txt` 原样保留，不得修改。
+- `CNAME` 内容固定为 `www.illageraris.dpdns.org`，不得修改或删除；删除会解绑自定义域名（历史上出现过反复删除重建的提交）。
+- `.nojekyll` 必须保留：没有它 GitHub Pages 会按 Jekyll 处理，忽略以 `.` 开头的目录，导致 `.well-known/` 下的验证文件 404。
+- `.well-known/microsoft-identity-association` 与 `.well-known/microsoft-identity-association.json` 是 Microsoft Entra 域验证文件，内容逐字保留（`applicationId` 不可改），不得删除。
 - `index.html` 中的 Bing 站长认证标签必须保留，值逐字不变：
 
   ```html
@@ -35,7 +39,7 @@ illagerCPR 个人主页仓库（GitHub Pages）。单页纯静态站点，无构
 
 - 新条目必须带 `.entry` 与 `data-kind="web|oss|fork"`、`data-stack="js|py|java|rust|node"`。筛选与计数依赖这两个属性，漏写会导致条目在筛选时消失或计数错误。
 - 增加或删除条目后，必须同步更新脚本中的 `totals`、筛选条总数与各 section 的 `data-count` / `data-nav-count`。
-- 网页项目链接到 `https://illagercpr.github.io/<name>/`，开源与分支项目链接到 `https://github.com/illagerCPR/<name>`，不要混用前缀。
+- 网页项目链接到 `https://www.illageraris.dpdns.org/<name>/`，开源与分支项目链接到 `https://github.com/illagerCPR/<name>`，不要混用前缀。
 - 网页项目条目默认带 `.tags`；例外：`10492` 不写标签（保持仅有标题 + 描述）。
 - 新增语言时，必须同时添加对应的 `.fchip[data-filter]` 按钮与条目的 `data-stack`。
 - 占位行使用 `.soon-item`，不可点击；新项目上线时替换它，并始终保留 1 个。

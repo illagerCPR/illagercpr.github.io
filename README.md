@@ -1,6 +1,6 @@
 # 我的个人主页
 
-基于 GitHub Pages 的个人主页：https://illagercpr.github.io/
+基于 GitHub Pages 的个人主页（自定义域名）：<https://www.illageraris.dpdns.org/>
 
 采用作品展厅布局：顶部导航、个人介绍、带轻量示意图的重点项目与项目目录。单页纯静态站，零依赖、无构建，手机与桌面自适应。默认跟随系统的明暗偏好，也可以手动切换；项目可按类型或语言筛选，有许可协议的项目会标注协议类型。
 
@@ -8,10 +8,10 @@
 
 可直接在线体验的纯前端应用：
 
-- [watermark](https://illagercpr.github.io/watermark/) — 纯前端图片水印工具
-- [earth-airline-test](https://illagercpr.github.io/earth-airline-test/) — 3D 航班可视化
-- [10492](https://illagercpr.github.io/10492/) — 做好心理准备。
-- [earth-airline-rx](https://illagercpr.github.io/earth-airline-rx/) — earth-airline-test 的 Reasonix 版本
+- [watermark](https://www.illageraris.dpdns.org/watermark/) — 纯前端图片水印工具
+- [earth-airline-test](https://www.illageraris.dpdns.org/earth-airline-test/) — 3D 航班可视化
+- [10492](https://www.illageraris.dpdns.org/10492/) — 做好心理准备。
+- [earth-airline-rx](https://www.illageraris.dpdns.org/earth-airline-rx/) — earth-airline-test 的 Reasonix 版本
 - 预留一个占位，供未来项目使用
 
 ## 开源项目
@@ -38,4 +38,4 @@
 ## 链接
 
 - GitHub：<https://github.com/illagerCPR>
-- 博客：<https://illagercpr.github.io/blog/>
+- 博客：<https://www.illageraris.dpdns.org/blog/>
