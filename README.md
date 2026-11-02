@@ -6,19 +6,20 @@
 
 ## 网页项目
 
-可直接在线体验的纯前端应用：
+可直接在线体验的 Web 应用：
 
-- [watermark](https://www.illageraris.dpdns.org/watermark/) — 纯前端图片水印工具
-- [earth-airline-test](https://www.illageraris.dpdns.org/earth-airline-test/) — 3D 航班可视化
+- [watermark](https://www.illageraris.dpdns.org/watermark/) — 图片水印工具
+- [Tiderift](https://www.illageraris.dpdns.org/Tiderift/) — 网页版 3D 沙盒游戏
 - [10492](https://www.illageraris.dpdns.org/10492/) — 做好心理准备。
-- [earth-airline-rx](https://www.illageraris.dpdns.org/earth-airline-rx/) — earth-airline-test 的 Reasonix 版本
+- [net-tools](https://net-tools.illageraris.dpdns.org/) — 网络检测工具集（Cloudflare 部署，访问时可能需通过人机验证）
+- [cf-chat](https://chat.illageraris.dpdns.org/) — AI 对话页（Cloudflare 部署，入口受 Access 认证保护）
+- [pic-privacy-rm](https://www.illageraris.dpdns.org/pic-privacy-rm/) — 图片元数据清理
 - 预留一个占位，供未来项目使用
 
 ## 开源项目
 
 托管在 GitHub 上的仓库：
 
-- [Tiderift](https://github.com/illagerCPR/Tiderift) — JavaScript / Three.js
 - [watermark](https://github.com/illagerCPR/watermark) — JavaScript / Canvas
 - [keyshow](https://github.com/illagerCPR/keyshow) — Rust / Vue 3 / Tauri 2
 - [hanoi](https://github.com/illagerCPR/hanoi) — Python / tkinter
@@ -28,6 +29,8 @@
 - [the-truth](https://github.com/illagerCPR/the-truth) — Java / NeoForge
 - [creative-container](https://github.com/illagerCPR/creative-container) — Java / NeoForge
 - [uncrafting-table-limit](https://github.com/illagerCPR/uncrafting-table-limit) — Java / NeoForge
+- [dsh-sudo-approve](https://github.com/illagerCPR/dsh-sudo-approve) — JavaScript / DeepSeek Harness 插件
+- [dsh-init](https://github.com/illagerCPR/dsh-init) — JavaScript / DeepSeek Harness 插件
 
 ## 分支项目
 

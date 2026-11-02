@@ -50,15 +50,15 @@
     --preview-line: #b0c4f3;
     --preview-ink: #4568ac;
     --preview-hill: #c6d5f4;
-    --flight-bg: #15294b;
-    --flight-line: #4873a8;
-    --flight-orbit: #b5d1ff;
-    --flight-ink: #e1edff;
+    --cube-top: #ffffff;
+    --cube-left: #a9c2ec;
+    --cube-right: #7f9dd4;
     --js: #886311;
     --rust: #a54a2d;
     --py: #316e99;
     --java: #965437;
     --node: #42713b;
+    --ts: #2f6fb2;
     --shadow: 0 12px 32px rgb(25 48 92 / .06);
     --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
@@ -81,15 +81,15 @@
     --preview-line: #597aac;
     --preview-ink: #c0d3fb;
     --preview-hill: #3c5981;
-    --flight-bg: #14253d;
-    --flight-line: #4972a3;
-    --flight-orbit: #b5d1ff;
-    --flight-ink: #e1edff;
+    --cube-top: #dce7fa;
+    --cube-left: #4f6d9c;
+    --cube-right: #3a527b;
     --js: #d9bd73;
     --rust: #e9a184;
     --py: #87bbdf;
     --java: #dfa581;
     --node: #9bc78e;
+    --ts: #8db9e8;
     --shadow: 0 12px 32px rgb(0 0 0 / .12);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -176,14 +176,14 @@
   .preview { position: relative; aspect-ratio: 2.25; overflow: hidden; background: var(--preview); border-bottom: 1px solid var(--rule); }
   .preview svg { display: block; width: 100%; height: 100%; transition: transform .5s var(--ease); }
   .plate:hover .preview svg { transform: scale(1.025); }
-  .preview.flight { background: var(--flight-bg); }
   .preview-paper { fill: var(--preview-paper); }
   .preview-line { fill: none; stroke: var(--preview-line); }
   .preview-ink { fill: var(--preview-ink); }
   .preview-hill { fill: var(--preview-hill); }
-  .flight-grid { fill: none; stroke: var(--flight-line); stroke-width: 1; }
-  .flight-route { fill: none; stroke: var(--flight-orbit); stroke-width: 1.5; }
-  .flight-label { fill: var(--flight-ink); }
+  .cube-top { fill: var(--cube-top); }
+  .cube-left { fill: var(--cube-left); }
+  .cube-right { fill: var(--cube-right); }
+  .cube-line { fill: none; stroke: var(--preview-line); stroke-opacity: .55; }
   .plate-body { display: flex; flex-direction: column; flex: 1; padding: 22px 26px 24px; }
   .plate-top { display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 10px; letter-spacing: .1em; color: var(--muted); }
   .live { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); }
@@ -213,7 +213,7 @@
   .row-meta > .arrow { color: var(--muted); font-size: 14px; }
   .lang { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 10px; color: var(--muted); white-space: nowrap; }
   .lang i { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
-  .js { color: var(--js); } .rust { color: var(--rust); } .py { color: var(--py); } .java { color: var(--java); } .node { color: var(--node); }
+  .js { color: var(--js); } .rust { color: var(--rust); } .py { color: var(--py); } .java { color: var(--java); } .node { color: var(--node); } .ts { color: var(--ts); }
   .row.feature { margin: 14px 0; padding: 28px 24px; background: var(--accent-soft); border: 1px solid var(--rule); border-radius: 8px; }
   .row.feature:hover { border-color: var(--accent); }
   .row.feature h3 { font-size: 24px; }
@@ -285,8 +285,8 @@
   <header class="topbar anim" style="--i:0">
     <a class="brand" href="#main" aria-label="illagerCPR 首页"><span class="brand-mark" aria-hidden="true">iC</span>illagerCPR</a>
     <nav class="main-nav" aria-label="页面导航">
-      <a href="#web"><span>网页项目</span><span class="c" data-nav-count="web">04</span></a>
-      <a href="#oss"><span>开源项目</span><span class="c" data-nav-count="oss">10</span></a>
+      <a href="#web"><span>网页项目</span><span class="c" data-nav-count="web">06</span></a>
+      <a href="#oss"><span>开源项目</span><span class="c" data-nav-count="oss">11</span></a>
       <a href="#fork"><span>分支项目</span><span class="c" data-nav-count="fork">01</span></a>
     </nav>
     <button class="theme" id="theme" type="button" aria-pressed="false"><span class="dot" aria-hidden="true"></span><span id="theme-label">深色</span><span class="sr-only">主题</span></button>
@@ -318,19 +318,20 @@
         <button class="fchip" type="button" data-filter="oss" aria-pressed="false">开源项目</button>
         <button class="fchip" type="button" data-filter="fork" aria-pressed="false">分支项目</button>
         <button class="fchip" type="button" data-filter="js" aria-pressed="false">JavaScript</button>
+        <button class="fchip" type="button" data-filter="ts" aria-pressed="false">TypeScript</button>
         <button class="fchip" type="button" data-filter="py" aria-pressed="false">Python</button>
         <button class="fchip" type="button" data-filter="java" aria-pressed="false">Java</button>
         <button class="fchip" type="button" data-filter="rust" aria-pressed="false">Rust</button>
         <button class="fchip" type="button" data-filter="node" aria-pressed="false">Node.js</button>
       </div>
-      <span class="fcount" aria-live="polite"><b id="shown">15</b> / 15 项</span>
+      <span class="fcount" aria-live="polite"><b id="shown">18</b> / 18 项</span>
     </div>
 
     <section class="sect" id="web" data-section="web" aria-labelledby="web-title">
       <header class="sec-head anim" style="--i:3">
-        <p class="kicker"><span class="idx">01</span><span class="lbl">/ WEB PROJECTS</span><span class="meta-count" data-count="web">04</span></p>
+        <p class="kicker"><span class="idx">01</span><span class="lbl">/ WEB PROJECTS</span><span class="meta-count" data-count="web">06</span></p>
         <h2 id="web-title">网页项目</h2>
-        <p class="sub">打开即用的纯前端应用，全部在浏览器本地运行。</p>
+        <p class="sub">打开即用的 Web 应用：有完全在浏览器本地运行的工具，也有带服务端的在线服务。</p>
       </header>
 
       <div class="plates">
@@ -359,7 +360,7 @@
           <div class="plate-body">
             <div class="plate-top"><span>01</span><span class="live"><i aria-hidden="true"></i>LIVE</span></div>
             <h3>watermark <span class="lic" title="The Unlicense"><span class="sr-only">许可协议：</span>Unlicense</span></h3>
-            <p class="desc">纯前端图片水印工具：多行文本平铺、DFT 频域盲水印（无需原图提取）、批量处理。零依赖，图片不会离开浏览器。</p>
+            <p class="desc">图片水印工具：多行文本平铺、DFT 频域盲水印（无需原图提取）、批量处理。零依赖，图片不会离开浏览器。</p>
             <div class="tags"><span class="tag">图片工具</span><span class="tag">本地处理</span></div>
             <div class="plate-foot">
               <code>illageraris.dpdns.org/watermark</code>
@@ -368,34 +369,17 @@
           </div>
         </a>
 
-        <a class="plate entry anim" data-kind="web" data-stack="js" style="--i:5" href="https://www.illageraris.dpdns.org/earth-airline-test/" target="_blank" rel="noopener">
-          <div class="preview flight" aria-hidden="true">
-            <svg viewBox="0 0 560 248" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g class="flight-grid">
-                <path d="M28 124H532M280 16V232" stroke-dasharray="3 7"/>
-                <circle cx="280" cy="124" r="92"/>
-                <ellipse cx="280" cy="124" rx="40" ry="92"/>
-                <ellipse cx="280" cy="124" rx="73" ry="92"/>
-                <ellipse cx="280" cy="124" rx="92" ry="32"/>
-                <path d="M209 66Q280 101 351 66M209 182Q280 147 351 182"/>
-              </g>
-              <ellipse class="flight-route" cx="280" cy="124" rx="158" ry="52" transform="rotate(-23 280 124)" stroke-dasharray="4 6" opacity=".7"/>
-              <path class="flight-route" d="M164 161Q244 36 380 86"/>
-              <circle class="flight-label" cx="164" cy="161" r="3"/>
-              <circle class="flight-route" cx="164" cy="161" r="8" opacity=".6"/>
-              <path class="flight-label" d="M0-12L3-3L13 3V6L3 3L2 11H-2L-3 3L-13 6V3L-3-3Z" transform="translate(380 86) rotate(106)"/>
-              <text class="flight-label" x="22" y="28" font-family="ui-monospace, monospace" font-size="9" letter-spacing="2">EARTH / AIRLINE</text>
-              <text class="flight-label" x="22" y="230" font-family="ui-monospace, monospace" font-size="9" letter-spacing="2">FLIGHT PATHS</text>
-              <text class="flight-label" x="465" y="230" font-family="ui-monospace, monospace" font-size="9" letter-spacing="2">02 / 3D</text>
-            </svg>
+        <a class="plate entry anim" data-kind="web" data-stack="js" style="--i:5" href="https://www.illageraris.dpdns.org/Tiderift/" target="_blank" rel="noopener">
+          <div class="preview" aria-hidden="true">
+            <svg viewBox="0 0 560 248" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse class="preview-line" opacity=".3" cx="280" cy="242" rx="132" ry="9"/><path class="cube-top" d="M280 49L338 78L280 107L222 78Z"/><path class="cube-left" d="M222 78L280 107L280 131L222 102Z"/><path class="cube-right" d="M280 107L338 78L338 102L280 131Z"/><path class="cube-line" d="M222 78L280 107L338 78"/><path class="cube-top" d="M280 25L338 54L280 83L222 54Z"/><path class="cube-left" d="M222 54L280 83L280 107L222 78Z"/><path class="cube-right" d="M280 83L338 54L338 78L280 107Z"/><path class="cube-line" d="M222 54L280 83L338 54"/><path class="cube-top" d="M280 1L338 30L280 59L222 30Z"/><path class="cube-left" d="M222 30L280 59L280 83L222 54Z"/><path class="cube-right" d="M280 59L338 30L338 54L280 83Z"/><path class="cube-line" d="M222 30L280 59L338 30"/><path class="cube-top" d="M222 78L280 107L222 136L164 107Z"/><path class="cube-left" d="M164 107L222 136L222 160L164 131Z"/><path class="cube-right" d="M222 136L280 107L280 131L222 160Z"/><path class="cube-line" d="M164 107L222 136L280 107"/><path class="cube-top" d="M222 54L280 83L222 112L164 83Z"/><path class="cube-left" d="M164 83L222 112L222 136L164 107Z"/><path class="cube-right" d="M222 112L280 83L280 107L222 136Z"/><path class="cube-line" d="M164 83L222 112L280 83"/><path class="cube-top" d="M222 30L280 59L222 88L164 59Z"/><path class="cube-left" d="M164 59L222 88L222 112L164 83Z"/><path class="cube-right" d="M222 88L280 59L280 83L222 112Z"/><path class="cube-line" d="M164 59L222 88L280 59"/><path class="cube-top" d="M338 78L396 107L338 136L280 107Z"/><path class="cube-left" d="M280 107L338 136L338 160L280 131Z"/><path class="cube-right" d="M338 136L396 107L396 131L338 160Z"/><path class="cube-line" d="M280 107L338 136L396 107"/><path class="cube-top" d="M338 54L396 83L338 112L280 83Z"/><path class="cube-left" d="M280 83L338 112L338 136L280 107Z"/><path class="cube-right" d="M338 112L396 83L396 107L338 136Z"/><path class="cube-line" d="M280 83L338 112L396 83"/><path class="cube-top" d="M338 30L396 59L338 88L280 59Z"/><path class="cube-left" d="M280 59L338 88L338 112L280 83Z"/><path class="cube-right" d="M338 88L396 59L396 83L338 112Z"/><path class="cube-line" d="M280 59L338 88L396 59"/><path class="cube-top" d="M164 107L222 136L164 165L106 136Z"/><path class="cube-left" d="M106 136L164 165L164 189L106 160Z"/><path class="cube-right" d="M164 165L222 136L222 160L164 189Z"/><path class="cube-line" d="M106 136L164 165L222 136"/><path class="cube-top" d="M164 83L222 112L164 141L106 112Z"/><path class="cube-left" d="M106 112L164 141L164 165L106 136Z"/><path class="cube-right" d="M164 141L222 112L222 136L164 165Z"/><path class="cube-line" d="M106 112L164 141L222 112"/><path class="cube-top" d="M164 59L222 88L164 117L106 88Z"/><path class="cube-left" d="M106 88L164 117L164 141L106 112Z"/><path class="cube-right" d="M164 117L222 88L222 112L164 141Z"/><path class="cube-line" d="M106 88L164 117L222 88"/><path class="cube-top" d="M280 107L338 136L280 165L222 136Z"/><path class="cube-left" d="M222 136L280 165L280 189L222 160Z"/><path class="cube-right" d="M280 165L338 136L338 160L280 189Z"/><path class="cube-line" d="M222 136L280 165L338 136"/><path class="cube-top" d="M280 83L338 112L280 141L222 112Z"/><path class="cube-left" d="M222 112L280 141L280 165L222 136Z"/><path class="cube-right" d="M280 141L338 112L338 136L280 165Z"/><path class="cube-line" d="M222 112L280 141L338 112"/><path class="cube-top" d="M280 59L338 88L280 117L222 88Z"/><path class="cube-left" d="M222 88L280 117L280 141L222 112Z"/><path class="cube-right" d="M280 117L338 88L338 112L280 141Z"/><path class="cube-line" d="M222 88L280 117L338 88"/><path class="cube-top" d="M396 107L454 136L396 165L338 136Z"/><path class="cube-left" d="M338 136L396 165L396 189L338 160Z"/><path class="cube-right" d="M396 165L454 136L454 160L396 189Z"/><path class="cube-line" d="M338 136L396 165L454 136"/><path class="cube-top" d="M396 83L454 112L396 141L338 112Z"/><path class="cube-left" d="M338 112L396 141L396 165L338 136Z"/><path class="cube-right" d="M396 141L454 112L454 136L396 165Z"/><path class="cube-line" d="M338 112L396 141L454 112"/><path class="cube-top" d="M396 59L454 88L396 117L338 88Z"/><path class="cube-left" d="M338 88L396 117L396 141L338 112Z"/><path class="cube-right" d="M396 117L454 88L454 112L396 141Z"/><path class="cube-line" d="M338 88L396 117L454 88"/><path class="cube-top" d="M222 136L280 165L222 194L164 165Z"/><path class="cube-left" d="M164 165L222 194L222 218L164 189Z"/><path class="cube-right" d="M222 194L280 165L280 189L222 218Z"/><path class="cube-line" d="M164 165L222 194L280 165"/><path class="cube-top" d="M222 112L280 141L222 170L164 141Z"/><path class="cube-left" d="M164 141L222 170L222 194L164 165Z"/><path class="cube-right" d="M222 170L280 141L280 165L222 194Z"/><path class="cube-line" d="M164 141L222 170L280 141"/><path class="cube-top" d="M222 88L280 117L222 146L164 117Z"/><path class="cube-left" d="M164 117L222 146L222 170L164 141Z"/><path class="cube-right" d="M222 146L280 117L280 141L222 170Z"/><path class="cube-line" d="M164 117L222 146L280 117"/><path class="cube-top" d="M338 136L396 165L338 194L280 165Z"/><path class="cube-left" d="M280 165L338 194L338 218L280 189Z"/><path class="cube-right" d="M338 194L396 165L396 189L338 218Z"/><path class="cube-line" d="M280 165L338 194L396 165"/><path class="cube-top" d="M338 112L396 141L338 170L280 141Z"/><path class="cube-left" d="M280 141L338 170L338 194L280 165Z"/><path class="cube-right" d="M338 170L396 141L396 165L338 194Z"/><path class="cube-line" d="M280 141L338 170L396 141"/><path class="cube-top" d="M338 88L396 117L338 146L280 117Z"/><path class="cube-left" d="M280 117L338 146L338 170L280 141Z"/><path class="cube-right" d="M338 146L396 117L396 141L338 170Z"/><path class="cube-line" d="M280 117L338 146L396 117"/><path class="cube-top" d="M280 165L338 194L280 223L222 194Z"/><path class="cube-left" d="M222 194L280 223L280 247L222 218Z"/><path class="cube-right" d="M280 223L338 194L338 218L280 247Z"/><path class="cube-line" d="M222 194L280 223L338 194"/><path class="cube-top" d="M280 141L338 170L280 199L222 170Z"/><path class="cube-left" d="M222 170L280 199L280 223L222 194Z"/><path class="cube-right" d="M280 199L338 170L338 194L280 223Z"/><path class="cube-line" d="M222 170L280 199L338 170"/><path class="cube-top" d="M280 117L338 146L280 175L222 146Z"/><path class="cube-left" d="M222 146L280 175L280 199L222 170Z"/><path class="cube-right" d="M280 175L338 146L338 170L280 199Z"/><path class="cube-line" d="M222 146L280 175L338 146"/><circle class="preview-line" cx="470" cy="78" r="36" opacity=".4" stroke-dasharray="3 9"/><path class="cube-top" d="M452 74L470 83L488 74L470 65Z"/><path class="cube-left" d="M452 74L470 83L470 91L452 82Z"/><path class="cube-right" d="M470 83L488 74L488 82L470 91Z"/><circle class="cube-top" cx="506" cy="112" r="3"/><text class="preview-ink" x="22" y="28" font-family="ui-monospace, monospace" font-size="9" letter-spacing="2">VOXEL / WORLD</text><text class="preview-ink" x="22" y="236" font-family="ui-monospace, monospace" font-size="9" letter-spacing="2">SEED / INFINITE</text><text class="preview-ink" x="462" y="236" font-family="ui-monospace, monospace" font-size="9" letter-spacing="2">02 / TR</text></svg>
           </div>
           <div class="plate-body">
             <div class="plate-top"><span>02</span><span class="live"><i aria-hidden="true"></i>LIVE</span></div>
-            <h3>earth-airline-test</h3>
-            <p class="desc">一个 HTML 文件完成的 3D 航班可视化：Three.js 可旋转地球、平滑模拟实时航迹，手机与桌面自适应。</p>
-            <div class="tags"><span class="tag">3D 可视化</span><span class="tag">Three.js</span></div>
+            <h3>Tiderift <span class="lic" title="GNU Affero General Public License v3.0"><span class="sr-only">许可协议：</span>AGPL-3.0</span></h3>
+            <p class="desc">网页版 3D 沙盒游戏（原 CubeWorld）：程序化无限世界，主世界／下界／末地／天域多维度，挖掘放置合成、体素光照与昼夜循环、怪物与红石、村庄要塞与村民交易，11 种语言界面，多槽位本地存档并可局域网联机。基于 Vite + Three.js。</p>
+            <div class="tags"><span class="tag">3D 沙盒</span><span class="tag">体素世界</span><span class="tag">局域网联机</span></div>
             <div class="plate-foot">
-              <code>illageraris.dpdns.org/earth-airline-test</code>
+              <code>illageraris.dpdns.org/Tiderift</code>
               <span class="go">打开 <span class="arrow" aria-hidden="true">↗</span></span>
             </div>
           </div>
@@ -413,18 +397,40 @@
             <div class="row-meta"><span class="lang"><i aria-hidden="true" style="background: var(--accent)"></i>LIVE</span><span class="arrow" aria-hidden="true">→</span></div>
           </a>
         </li>
-        <li class="row-item entry anim" data-kind="web" data-stack="js" style="--i:7">
-          <a class="row" href="https://www.illageraris.dpdns.org/earth-airline-rx/" target="_blank" rel="noopener">
+        <li class="row-item entry anim" data-kind="web" data-stack="ts" style="--i:7">
+          <a class="row" href="https://net-tools.illageraris.dpdns.org/" target="_blank" rel="noopener">
             <span class="no">04</span>
             <div>
-              <h3>earth-airline-rx</h3>
-              <p class="desc">earth-airline-test 的 Reasonix 版本。</p>
-              <div class="tags"><span class="tag">3D 可视化</span><span class="tag">Reasonix</span></div>
+              <h3>net-tools <span class="lic" title="MIT License"><span class="sr-only">许可协议：</span>MIT</span></h3>
+              <p class="desc">网络检测工具集：出口 IP 与 ASN、IP 归属与 RDAP、DNS 记录与 DNSSEC、DNS 泄漏对照、请求头与 TLS 指纹、TCP 端口探测、证书历史。部署在 Cloudflare，访问时可能需要通过人机验证。</p>
+              <div class="tags"><span class="tag">网络诊断</span><span class="tag">DNS</span><span class="tag">Cloudflare</span></div>
             </div>
-            <div class="row-meta"><span class="lang"><i aria-hidden="true" style="background: var(--accent)"></i>LIVE</span><span class="arrow" aria-hidden="true">→</span></div>
+            <div class="row-meta"><span class="lang ts"><i aria-hidden="true"></i>TypeScript</span><span class="arrow" aria-hidden="true">→</span></div>
           </a>
         </li>
-        <li class="row-item soon-item anim" data-kind="web" data-stack="" style="--i:8">
+        <li class="row-item entry anim" data-kind="web" data-stack="ts" style="--i:8">
+          <a class="row" href="https://chat.illageraris.dpdns.org/" target="_blank" rel="noopener">
+            <span class="no">05</span>
+            <div>
+              <h3>cf-chat <span class="lic" title="MIT License"><span class="sr-only">许可协议：</span>MIT</span></h3>
+              <p class="desc">跑在 Cloudflare Workers 上的 AI 对话页：流式输出、思考过程折叠、Token 用量统计、多会话本地保存；默认使用 Workers AI，也可自带 API Key 接入任意 OpenAI 兼容服务。入口受 Cloudflare Access 保护，需要先通过身份验证。</p>
+              <div class="tags"><span class="tag">AI 对话</span><span class="tag">Workers AI</span><span class="tag">Access 认证</span></div>
+            </div>
+            <div class="row-meta"><span class="lang ts"><i aria-hidden="true"></i>TypeScript</span><span class="arrow" aria-hidden="true">→</span></div>
+          </a>
+        </li>
+        <li class="row-item entry anim" data-kind="web" data-stack="ts" style="--i:9">
+          <a class="row" href="https://www.illageraris.dpdns.org/pic-privacy-rm/" target="_blank" rel="noopener">
+            <span class="no">06</span>
+            <div>
+              <h3>pic-privacy-rm <span class="lic" title="MIT License"><span class="sr-only">许可协议：</span>MIT</span></h3>
+              <p class="desc">浏览器端图片元数据清理：逐字节移除 JPEG／PNG／WebP／GIF／HEIC／AVIF／TIFF 中的 EXIF、GPS、XMP、IPTC 与 C2PA 记录，保留像素与色彩配置，导出后再校验一遍。</p>
+              <div class="tags"><span class="tag">隐私</span><span class="tag">图片元数据</span><span class="tag">本地处理</span></div>
+            </div>
+            <div class="row-meta"><span class="lang ts"><i aria-hidden="true"></i>TypeScript</span><span class="arrow" aria-hidden="true">→</span></div>
+          </a>
+        </li>
+        <li class="row-item soon-item anim" data-kind="web" data-stack="" style="--i:10">
           <div class="row soon">
             <span class="no">--</span>
             <div>
@@ -439,29 +445,18 @@
 
     <section class="sect" id="oss" data-section="oss" aria-labelledby="oss-title">
       <header class="sec-head">
-        <p class="kicker"><span class="idx">02</span><span class="lbl">/ OPEN SOURCE</span><span class="meta-count" data-count="oss">10</span></p>
+        <p class="kicker"><span class="idx">02</span><span class="lbl">/ OPEN SOURCE</span><span class="meta-count" data-count="oss">11</span></p>
         <h2 id="oss-title">开源项目</h2>
         <p class="sub">托管在 GitHub 上的仓库，按语言标注技术栈。</p>
       </header>
 
       <ul class="rows">
         <li class="row-item entry" data-kind="oss" data-stack="js">
-          <a class="row feature" href="https://github.com/illagerCPR/Tiderift" target="_blank" rel="noopener">
-            <span class="no">05</span>
-            <div>
-              <h3>Tiderift</h3>
-              <p class="desc">网页版 3D 沙盒游戏（原 CubeWorld）：程序化无限世界，主世界／下界／末地／天域多维度，挖掘放置合成、体素光照与昼夜循环、怪物与红石、村庄要塞与村民交易，11 种语言界面，多槽位本地存档并可局域网联机。Vite + Three.js 纯前端实现。</p>
-              <div class="tags"><span class="tag">JavaScript</span><span class="tag">Three.js</span><span class="tag">局域网联机</span></div>
-            </div>
-            <div class="row-meta"><span class="lang js"><i aria-hidden="true"></i>JavaScript</span><span class="arrow" aria-hidden="true">→</span></div>
-          </a>
-        </li>
-        <li class="row-item entry" data-kind="oss" data-stack="js">
           <a class="row" href="https://github.com/illagerCPR/watermark" target="_blank" rel="noopener">
-            <span class="no">06</span>
+            <span class="no">07</span>
             <div>
               <h3>watermark <span class="lic" title="The Unlicense"><span class="sr-only">许可协议：</span>Unlicense</span></h3>
-              <p class="desc">纯前端图片水印工具：多行文本平铺、DFT 频域盲水印与批量处理，基于 Canvas API，零外部库。</p>
+              <p class="desc">图片水印工具：多行文本平铺、DFT 频域盲水印与批量处理，基于 Canvas API，零外部库。</p>
               <div class="tags"><span class="tag">图片处理</span><span class="tag">Canvas</span></div>
             </div>
             <div class="row-meta"><span class="lang js"><i aria-hidden="true"></i>JavaScript</span><span class="arrow" aria-hidden="true">→</span></div>
@@ -469,7 +464,7 @@
         </li>
         <li class="row-item entry" data-kind="oss" data-stack="rust">
           <a class="row" href="https://github.com/illagerCPR/keyshow" target="_blank" rel="noopener">
-            <span class="no">07</span>
+            <span class="no">08</span>
             <div>
               <h3>keyshow <span class="lic" title="The Unlicense"><span class="sr-only">许可协议：</span>Unlicense</span></h3>
               <p class="desc">桌面端键盘、鼠标与手柄操作实时监控：组合键、滚轮、Xbox / PS / NS 手柄实时显示，窗口贴边吸附与自定义设置。</p>
@@ -480,7 +475,7 @@
         </li>
         <li class="row-item entry" data-kind="oss" data-stack="py">
           <a class="row" href="https://github.com/illagerCPR/hanoi" target="_blank" rel="noopener">
-            <span class="no">08</span>
+            <span class="no">09</span>
             <div>
               <h3>hanoi <span class="lic" title="The Unlicense"><span class="sr-only">许可协议：</span>Unlicense</span></h3>
               <p class="desc">汉诺塔游戏，GUI 与 CLI 双模式：3～10 盘自适应、点击／拖拽移动、自动演示、计分与求解动画，基于 Python 标准库。</p>
@@ -491,7 +486,7 @@
         </li>
         <li class="row-item entry" data-kind="oss" data-stack="py">
           <a class="row" href="https://github.com/illagerCPR/deepseek-harness-startup" target="_blank" rel="noopener">
-            <span class="no">09</span>
+            <span class="no">10</span>
             <div>
               <h3>deepseek-harness-startup <span class="lic" title="The Unlicense"><span class="sr-only">许可协议：</span>Unlicense</span></h3>
               <p class="desc">Windows GUI 启动器：一键启动 DeepSeek Harness WebUI，支持本机与 LAN 模式，隐藏控制台常驻运行，可在桌面创建快捷方式。</p>
@@ -502,7 +497,7 @@
         </li>
         <li class="row-item entry" data-kind="oss" data-stack="py">
           <a class="row" href="https://github.com/illagerCPR/video-watermark" target="_blank" rel="noopener">
-            <span class="no">10</span>
+            <span class="no">11</span>
             <div>
               <h3>video-watermark <span class="lic" title="The Unlicense"><span class="sr-only">许可协议：</span>Unlicense</span></h3>
               <p class="desc">桌面视频水印软件：全屏平铺（文字／图片、可旋转）与 6 种移动轨迹，实时预览、批量处理与编码控制，Python + ffmpeg，支持 GPU 加速。</p>
@@ -513,7 +508,7 @@
         </li>
         <li class="row-item entry" data-kind="oss" data-stack="node">
           <a class="row" href="https://github.com/illagerCPR/LAN-Drop" target="_blank" rel="noopener">
-            <span class="no">11</span>
+            <span class="no">12</span>
             <div>
               <h3>LAN-Drop <span class="lic" title="MIT License"><span class="sr-only">许可协议：</span>MIT</span></h3>
               <p class="desc">局域网文件与文字传输：PC 作服务端、Android 作客户端，扫码／扫描／手输配对，文件走 HTTP 断点续传，数据不出局域网。</p>
@@ -524,7 +519,7 @@
         </li>
         <li class="row-item entry" data-kind="oss" data-stack="java">
           <a class="row" href="https://github.com/illagerCPR/the-truth" target="_blank" rel="noopener">
-            <span class="no">12</span>
+            <span class="no">13</span>
             <div>
               <h3>the-truth <span class="lic" title="GNU Lesser General Public License v3.0"><span class="sr-only">许可协议：</span>LGPL-3.0</span></h3>
               <p class="desc">AE2 终局扩展（Minecraft 1.21.1 / NeoForge）：新增「确界」维度与量子入口，覆盖决定稳定性，维度产物反向增强主世界 AE2，永不静默删除玩家物品。</p>
@@ -535,7 +530,7 @@
         </li>
         <li class="row-item entry" data-kind="oss" data-stack="java">
           <a class="row" href="https://github.com/illagerCPR/creative-container" target="_blank" rel="noopener">
-            <span class="no">13</span>
+            <span class="no">14</span>
             <div>
               <h3>creative-container <span class="lic" title="GNU Lesser General Public License v3.0"><span class="sr-only">许可协议：</span>LGPL-3.0</span></h3>
               <p class="desc">整合包终局方块：像创造模式物品栏一样搜索取物，容器池物品不限量，可被 ME 存储总线与漏斗／Pipez／Create 抽取，并写入 ProjectE EMC。</p>
@@ -546,13 +541,35 @@
         </li>
         <li class="row-item entry" data-kind="oss" data-stack="java">
           <a class="row" href="https://github.com/illagerCPR/uncrafting-table-limit" target="_blank" rel="noopener">
-            <span class="no">14</span>
+            <span class="no">15</span>
             <div>
               <h3>uncrafting-table-limit <span class="lic" title="GNU Lesser General Public License v2.1"><span class="sr-only">许可协议：</span>LGPL-2.1</span></h3>
               <p class="desc">为暮色森林拆解台加可配置限制的 NeoForge 模组：全局冷却、禁用、方块耐久与物品代价四种模式，服务端判定，用于服务器平衡。</p>
               <div class="tags"><span class="tag">NeoForge</span><span class="tag">服务器平衡</span><span class="tag">1.21.1</span></div>
             </div>
             <div class="row-meta"><span class="lang java"><i aria-hidden="true"></i>Java</span><span class="arrow" aria-hidden="true">→</span></div>
+          </a>
+        </li>
+        <li class="row-item entry" data-kind="oss" data-stack="js">
+          <a class="row" href="https://github.com/illagerCPR/dsh-sudo-approve" target="_blank" rel="noopener">
+            <span class="no">16</span>
+            <div>
+              <h3>dsh-sudo-approve <span class="lic" title="MIT License"><span class="sr-only">许可协议：</span>MIT</span></h3>
+              <p class="desc">DSH 插件：智能体要执行 sudo 时，聊天输入框会变成授权面板，列出全部待执行命令，由你输入密码确认；拒绝或超时都会把结果回告智能体，并留审计日志。</p>
+              <div class="tags"><span class="tag">DSH 插件</span><span class="tag">授权确认</span><span class="tag">Node.js</span></div>
+            </div>
+            <div class="row-meta"><span class="lang js"><i aria-hidden="true"></i>JavaScript</span><span class="arrow" aria-hidden="true">→</span></div>
+          </a>
+        </li>
+        <li class="row-item entry" data-kind="oss" data-stack="js">
+          <a class="row" href="https://github.com/illagerCPR/dsh-init" target="_blank" rel="noopener">
+            <span class="no">17</span>
+            <div>
+              <h3>dsh-init <span class="lic" title="MIT License"><span class="sr-only">许可协议：</span>MIT</span></h3>
+              <p class="desc">DSH 插件：注册 /init 斜杠命令，把 AGENTS.md 的调研与写作提示词作为一条用户消息发给智能体，让它为当前仓库创建或改进 AGENTS.md。</p>
+              <div class="tags"><span class="tag">DSH 插件</span><span class="tag">AGENTS.md</span></div>
+            </div>
+            <div class="row-meta"><span class="lang js"><i aria-hidden="true"></i>JavaScript</span><span class="arrow" aria-hidden="true">→</span></div>
           </a>
         </li>
       </ul>
@@ -568,7 +585,7 @@
       <ul class="rows">
         <li class="row-item entry" data-kind="fork" data-stack="java">
           <a class="row feature" href="https://github.com/illagerCPR/AppliedE" target="_blank" rel="noopener">
-            <span class="no">15</span>
+            <span class="no">18</span>
             <div>
               <h3>AppliedE <span class="lic" title="GNU Lesser General Public License v3.0"><span class="sr-only">许可协议：</span>LGPL-3.0</span></h3>
               <p class="desc">上游 AppliedE 的维护分支：把 ProjectE 的 EMC 接入 AE2 ME 网络；修复层级样板崩溃，新增 transmutationBatchSize 吞吐配置，适配 Minecraft 1.21.1 / NeoForge 与 NeoECO AE、Data Energistics。</p>
@@ -647,7 +664,7 @@
     var sections = Array.prototype.slice.call(document.querySelectorAll('[data-section]'));
     var navCounts = Array.prototype.slice.call(document.querySelectorAll('[data-nav-count]'));
     var shownEl = document.getElementById('shown');
-    var totals = { web: 4, oss: 10, fork: 1 };
+    var totals = { web: 6, oss: 11, fork: 1 };
 
     function pad(n) { return (n < 10 ? '0' : '') + n; }
 

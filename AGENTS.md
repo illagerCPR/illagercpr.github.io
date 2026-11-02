@@ -31,15 +31,16 @@ illagerCPR 个人主页仓库（GitHub Pages）。单页纯静态站点，无构
 
 - 作品展厅布局：顶部 `.topbar` 放品牌、章节导航与主题开关；`main` 依次是 `.intro` 身份介绍（头像、名字、定位语、外链）、sticky 筛选条与三个 section。
 - 三个 section 固定为「网页项目」`#web`、「开源项目」`#oss`、「分支项目」`#fork`。
-- 网页项目区：2 个 `.plate` 版面（内联 SVG 示意图 + `.plate-body` 内容）+ 2 个目录行 + 1 个 `.soon-item` 占位行（共 4 个项目）。示意图为装饰元素，使用 `aria-hidden="true"`，配色引用主题变量。
-- 开源项目区：Tiderift 是 feature 行，其余为普通目录行（共 10 个项目）。
+- 网页项目区：2 个 `.plate` 版面（watermark、Tiderift，内联 SVG 示意图 + `.plate-body` 内容）+ 4 个目录行 + 1 个 `.soon-item` 占位行（共 6 个项目）。示意图为装饰元素，使用 `aria-hidden="true"`，配色引用主题变量；立体示意图用 `.cube-top` / `.cube-left` / `.cube-right` / `.cube-line`（Tiderift 是 3×3 的浮空体素块）。
+- 开源项目区：11 个普通目录行（Tiderift 已移到网页项目，不再有 feature 行）。
 - 分支项目区：当前仅 AppliedE（上游 `62832/AppliedE` 的维护分支），文档在本地 `~/projects/AppliedE/wiki`。
 
 ## 增删项目
 
-- 新条目必须带 `.entry` 与 `data-kind="web|oss|fork"`、`data-stack="js|py|java|rust|node"`。筛选与计数依赖这两个属性，漏写会导致条目在筛选时消失或计数错误。
+- 新条目必须带 `.entry` 与 `data-kind="web|oss|fork"`、`data-stack="js|ts|py|java|rust|node"`。筛选与计数依赖这两个属性，漏写会导致条目在筛选时消失或计数错误。
 - 增加或删除条目后，必须同步更新脚本中的 `totals`、筛选条总数与各 section 的 `data-count` / `data-nav-count`。
-- 网页项目链接到 `https://www.illageraris.dpdns.org/<name>/`，开源与分支项目链接到 `https://github.com/illagerCPR/<name>`，不要混用前缀。
+- 网页项目链接到 `https://www.illageraris.dpdns.org/<name>/`；独立子域部署的项目写自己的域名（`net-tools.illageraris.dpdns.org`、`chat.illageraris.dpdns.org`）。开源与分支项目链接到 `https://github.com/illagerCPR/<name>`，不要混用前缀。
+- 描述里不要把项目写成「只在浏览器里运行」这类限定：网页项目里既有本地运行的静态工具，也有带服务端的服务（net-tools、cf-chat 部署在 Cloudflare，访问会先遇到托管挑战，cf-chat 还要过 Access 认证，需在描述里说明）。
 - 网页项目条目默认带 `.tags`；例外：`10492` 不写标签（保持仅有标题 + 描述）。
 - 新增语言时，必须同时添加对应的 `.fchip[data-filter]` 按钮与条目的 `data-stack`。
 - 占位行使用 `.soon-item`，不可点击；新项目上线时替换它，并始终保留 1 个。
