@@ -32,7 +32,7 @@ illagerCPR 个人主页仓库（GitHub Pages）。单页纯静态站点，无构
 - 作品展厅布局：顶部 `.topbar` 放品牌、章节导航与主题开关；`main` 依次是 `.intro` 身份介绍（头像、名字、定位语、外链）、sticky 筛选条与三个 section。
 - 三个 section 固定为「网页项目」`#web`、「开源项目」`#oss`、「分支项目」`#fork`。
 - 网页项目区：2 个 `.plate` 版面（watermark、Tiderift，内联 SVG 示意图 + `.plate-body` 内容）+ 4 个目录行 + 1 个 `.soon-item` 占位行（共 6 个项目）。示意图为装饰元素，使用 `aria-hidden="true"`，配色引用主题变量；立体示意图用 `.cube-top` / `.cube-left` / `.cube-right` / `.cube-line`（Tiderift 是 3×3 的浮空体素块）。
-- 开源项目区：11 个普通目录行（Tiderift 已移到网页项目，不再有 feature 行）。
+- 开源项目区：12 个条目，Tiderift 是 feature 行（它同时列在网页项目区），其余为普通目录行。
 - 分支项目区：当前仅 AppliedE（上游 `62832/AppliedE` 的维护分支），文档在本地 `~/projects/AppliedE/wiki`。
 
 ## 增删项目

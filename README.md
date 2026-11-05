@@ -20,6 +20,7 @@
 
 托管在 GitHub 上的仓库：
 
+- [Tiderift](https://github.com/illagerCPR/Tiderift) — JavaScript / Three.js
 - [watermark](https://github.com/illagerCPR/watermark) — JavaScript / Canvas
 - [keyshow](https://github.com/illagerCPR/keyshow) — Rust / Vue 3 / Tauri 2
 - [hanoi](https://github.com/illagerCPR/hanoi) — Python / tkinter
