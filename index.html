@@ -151,6 +151,11 @@
   .intro-links a { display: inline-flex; align-items: center; gap: 20px; border: 1px solid var(--rule-strong); border-radius: 6px; padding: 8px 16px; font-size: 13px; background: var(--surface); }
   .intro-links a:first-child { background: var(--ink); color: var(--paper); border-color: var(--ink); }
   .intro-links a:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+  .intro-svc { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; margin-top: 18px; padding-top: 14px; border-top: 1px dashed var(--rule); }
+  .intro-svc .lbl { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; color: var(--muted); }
+  .intro-svc a { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: var(--muted); }
+  .intro-svc a:hover { color: var(--accent); }
+  .intro-svc .note { font-size: 11px; color: var(--muted); opacity: .75; }
   .filters {
     position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 16px;
     min-height: 70px; padding: 14px 0; margin-bottom: 42px; background: var(--paper);
@@ -307,6 +312,13 @@
         <div class="intro-links">
           <a href="https://github.com/illagerCPR" target="_blank" rel="me noopener">GitHub <span aria-hidden="true">↗</span></a>
           <a href="https://www.illageraris.dpdns.org/blog/" target="_blank" rel="noopener">博客 <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="intro-svc">
+          <span class="lbl">SERVICES</span>
+          <a href="https://gitea.illageraris.dpdns.org/" target="_blank" rel="noopener">Gitea <span aria-hidden="true">↗</span></a>
+          <a href="https://gitlab.illageraris.dpdns.org/" target="_blank" rel="noopener">GitLab <span aria-hidden="true">↗</span></a>
+          <a href="https://docker.illageraris.dpdns.org/" target="_blank" rel="noopener">Docker 监测 <span aria-hidden="true">↗</span></a>
+          <span class="note">均需 Cloudflare Access 认证</span>
         </div>
       </div>
     </div>

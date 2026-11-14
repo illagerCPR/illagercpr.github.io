@@ -43,3 +43,11 @@
 
 - GitHub：<https://github.com/illagerCPR>
 - 博客：<https://www.illageraris.dpdns.org/blog/>
+
+## 自建服务
+
+以下服务均需通过 Cloudflare Access 认证：
+
+- [Gitea](https://gitea.illageraris.dpdns.org/) — 私有 Gitea
+- [GitLab](https://gitlab.illageraris.dpdns.org/) — 私有 GitLab
+- [Docker 监测](https://docker.illageraris.dpdns.org/) — Docker 服务监测
